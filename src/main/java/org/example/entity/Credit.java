@@ -19,7 +19,7 @@ public class Credit {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
-    private Integer id;
+    private Long id;
 
     @Column(name = "price_per_month")
     private BigDecimal pricePerMonth;

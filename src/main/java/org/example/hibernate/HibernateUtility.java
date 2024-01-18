@@ -1,4 +1,4 @@
-package org.example.hibernate;//package org.example.hibernate;
+package org.example.hibernate;
 
 import org.example.entity.*;
 import org.hibernate.SessionFactory;
@@ -29,26 +29,3 @@ public class HibernateUtility {
         return sessionFactory;
     }
 }
-//import org.hibernate.Session;
-//import org.hibernate.SessionFactory;
-//import org.hibernate.cfg.Configuration;
-//
-//public class HibernateUtility {
-//
-//    private static final SessionFactory sessionFactory = buildSessionFactory();
-//
-//    private static SessionFactory buildSessionFactory() {
-//        try {
-//
-//            return new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
-//        } catch (Throwable ex) {
-//            System.err.println("Initial SessionFactory creation failed." + ex);
-//            throw new ExceptionInInitializerError(ex);
-//        }
-//    }
-//
-//    public static SessionFactory getSessionFactory() {
-//        return sessionFactory;
-//    }
-//}
-
