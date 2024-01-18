@@ -18,7 +18,7 @@ import java.util.Date;
 public class Sales {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Integer id;
 
@@ -38,4 +38,5 @@ public class Sales {
     private BigDecimal paidAmount;
     @Column(name = "in_credit")
     private Boolean inCredit;
+
 }

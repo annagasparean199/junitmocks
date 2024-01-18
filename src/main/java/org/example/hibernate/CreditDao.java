@@ -2,6 +2,9 @@ package org.example.hibernate;
 
 import org.example.entity.Credit;
 import org.example.interfaces.GenericDao;
+import org.hibernate.Session;
+
+import java.util.List;
 
 public class CreditDao implements GenericDao<Credit> {
 
@@ -19,29 +22,38 @@ public class CreditDao implements GenericDao<Credit> {
         return GenericDao.super.findById(id, entityClass);
     }
 
-//    public List<Credit> getAllCredits() {
-//        Transaction transaction = null;
-//        List<Credit> credits = null;
-//        try {
-//            setUp();
-//            transaction = session.beginTransaction();
-//            credits = session.createQuery("from Credit").list();
-//            transaction.commit();
-//        } catch (Exception e) {
-//            if (transaction != null) {
-//                transaction.rollback();
-//            }
-//            e.printStackTrace();
-//        } finally {
-//            if (session != null) {
-//                session.close();
-//            }
-//        }
-//        return credits;
-//    }
+    @Override
+    public List<Credit> getAllEntities(Class<Credit> entityClass) {
+        return GenericDao.super.getAllEntities(entityClass);
+    }
 
-//    @Override
-//    public Credit findById(Long id) {
-//        return ;
-//    }
+    @Override
+    public void delete(Credit entity) {
+        GenericDao.super.delete(entity);
+    }
+
+    @Override
+    public Class<Credit> getEntityClass() {
+        return Credit.class;
+    }
+
+    @Override
+    public void deleteById(Long id) {
+        GenericDao.super.deleteById(id);
+    }
+
+    @Override
+    public void save(Credit entity) {
+        GenericDao.super.save(entity);
+    }
+
+    @Override
+    public Session getSession() {
+        return GenericDao.super.getSession();
+    }
+
+    @Override
+    public void updateEntity(Credit entity, Session session) {
+        GenericDao.super.updateEntity(entity, session);
+    }
 }
