@@ -2,20 +2,12 @@ package org.example.hibernate;
 
 import org.example.entity.Delivery;
 import org.example.entity.Discount;
+import org.example.interfaces.GenericDao;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
+import java.util.List;
 
-import static org.example.hibernate.HibernateUtility.getSessionFactory;
-
-public class DiscountDao {
-
-    private SessionFactory sessionFactory;
-    private Session session;
+public class DiscountDao implements GenericDao<Discount> {
     private static DiscountDao instance;
 
     public static synchronized DiscountDao getDiscountDaoInstance() {
@@ -25,35 +17,38 @@ public class DiscountDao {
         return instance;
     }
 
-    public void setUp() {
-        sessionFactory = getSessionFactory();
-        session = sessionFactory.openSession();
+    @Override
+    public Discount findById(Long id, Class<Discount> entityClass) {
+        return GenericDao.super.findById(id, entityClass);
     }
 
-    public Discount findById(Long id) {
-        Transaction transaction = null;
-        Discount discount = null;
-        try {
-            setUp();
-            transaction = session.beginTransaction();
+    @Override
+    public List<Discount> getAllEntities(Class<Discount> entityClass) {
+        return GenericDao.super.getAllEntities(entityClass);
+    }
 
-            CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
-            CriteriaQuery<Discount> query = criteriaBuilder.createQuery(Discount.class);
-            Root<Discount> root = query.from(Discount.class);
-            query.select(root).where(criteriaBuilder.equal(root.get("id"), id));
+    @Override
+    public void delete(Discount entity) {
+        GenericDao.super.delete(entity);
+    }
 
-            discount = session.createQuery(query).uniqueResult();
-            transaction.commit();
-        } catch (Exception e) {
-            if (transaction != null) {
-                transaction.rollback();
-            }
-            e.printStackTrace();
-        } finally {
-            if (session != null) {
-                session.close();
-            }
-        }
-        return discount;
+    @Override
+    public Class<Discount> getEntityClass() {
+        return Discount.class;
+    }
+
+    @Override
+    public void deleteById(Long id) {
+        GenericDao.super.deleteById(id);
+    }
+
+    @Override
+    public void save(Discount entity) {
+        GenericDao.super.save(entity);
+    }
+
+    @Override
+    public void updateEntity(Discount entity) {
+        GenericDao.super.updateEntity(entity);
     }
 }

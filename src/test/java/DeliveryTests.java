@@ -1,19 +1,35 @@
-//import org.junit.jupiter.api.AfterEach;
-//import org.junit.jupiter.api.Test;
-//import org.springframework.boot.test.context.SpringBootTest;
-//
-//import static org.junit.jupiter.api.AssertEquals.assertEquals;
-//
-//public class DeliveryTests {
-//
-//    @AfterEach
-//    public void clear(){
-//        DeliveryService.deleteAllRecords();
-//        SalesService.deleteAllRecords();
-//        CreditService.deleteAllCredits();
-//        ProductService.deleteAllProducts();
-//    }
-//
+import org.example.hibernate.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+
+import static utils.Utils.getRecord;
+
+public class DeliveryTests {
+
+    @AfterEach
+    public void clear() {
+    }
+
+    @Test
+    public void testCalculateStoreLossForMonth() {
+        getRecord();
+        Assertions.assertEquals(300.0, DeliveryDao.getDeliveryDaoInstance().getStoreLossAmountForMonth(1));
+    }
+
+    @Test
+    public void testCalculateStoreProfitForMonth() {
+        getRecord();
+        Assertions.assertEquals(2250, DeliveryDao.getDeliveryDaoInstance().getStoreProfitAmountForMonth(1));
+    }
+
+    @Test
+    public void assertSalesBalance() {
+        getRecord();
+        double result = DeliveryDao.getDeliveryDaoInstance().getStoreSalesBalancePerMonth(1);
+        Assertions.assertEquals(1950, result);
+    }
+}
 //    @Test
 //    public void testCalculateStoreLossForMonth(){
 //        Product product = new Product(color, quantity, name, price = 10, inStock);
@@ -43,4 +59,14 @@
 //        int result = Delivery.getStoreProfitPerMonth("Month")-Delivery.getStoreLossAmountForMonth("Month");// ? or int result = getSalesBalancePerMonth("Month");
 //        assertEquals(result, -900);
 //    }
+//        ProductDao.getProductDaoInstance().deleteById(1L);
+//        ProductDao.getProductDaoInstance().deleteById(2L);
+//        UserDao.getUserDaoInstance().deleteById(1L);
+//        SalesDao.getSalesDaoInstance().deleteById(1L);
+//        SalesDao.getSalesDaoInstance().deleteById(2L);
+//        DeliveryDao.getDeliveryDaoInstance().deleteById(1L);
+//        DeliveryDao.getDeliveryDaoInstance().deleteById(2L);
+//        CreditDao.getCreditDaoInstance().deleteById(1L);
+//        CreditDao.getCreditDaoInstance().deleteById(2L);
+//        DiscountDao.getDiscountDaoInstance().deleteById(1L);
 //}

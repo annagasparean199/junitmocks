@@ -1,21 +1,12 @@
 package org.example.hibernate;
 
-import org.example.entity.Delivery;
 import org.example.entity.Sales;
+import org.example.interfaces.GenericDao;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
+import java.util.List;
 
-import static org.example.hibernate.HibernateUtility.getSessionFactory;
-
-public class SalesDao {
-
-    private SessionFactory sessionFactory;
-    private Session session;
+public class SalesDao implements GenericDao<Sales> {
     private static SalesDao instance;
 
     public static synchronized SalesDao getSalesDaoInstance() {
@@ -25,35 +16,38 @@ public class SalesDao {
         return instance;
     }
 
-    public void setUp() {
-        sessionFactory = getSessionFactory();
-        session = sessionFactory.openSession();
+    @Override
+    public Sales findById(Long id, Class<Sales> entityClass) {
+        return GenericDao.super.findById(id, entityClass);
     }
 
-    public Sales findById(Long id) {
-        Transaction transaction = null;
-        Sales sales = null;
-        try {
-            setUp();
-            transaction = session.beginTransaction();
+    @Override
+    public List<Sales> getAllEntities(Class<Sales> entityClass) {
+        return GenericDao.super.getAllEntities(entityClass);
+    }
 
-            CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
-            CriteriaQuery<Sales> query = criteriaBuilder.createQuery(Sales.class);
-            Root<Sales> root = query.from(Sales.class);
-            query.select(root).where(criteriaBuilder.equal(root.get("id"), id));
+    @Override
+    public void delete(Sales entity) {
+        GenericDao.super.delete(entity);
+    }
 
-            sales = session.createQuery(query).uniqueResult();
-            transaction.commit();
-        } catch (Exception e) {
-            if (transaction != null) {
-                transaction.rollback();
-            }
-            e.printStackTrace();
-        } finally {
-            if (session != null) {
-                session.close();
-            }
-        }
-        return sales;
+    @Override
+    public Class<Sales> getEntityClass() {
+        return Sales.class;
+    }
+
+    @Override
+    public void deleteById(Long id) {
+        GenericDao.super.deleteById(id);
+    }
+
+    @Override
+    public void save(Sales entity) {
+        GenericDao.super.save(entity);
+    }
+
+    @Override
+    public void updateEntity(Sales entity) {
+        GenericDao.super.updateEntity(entity);
     }
 }

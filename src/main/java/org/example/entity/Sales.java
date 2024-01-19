@@ -20,7 +20,7 @@ public class Sales {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Integer id;
+    private Long id;
 
     @ManyToOne
     @JoinColumn(name = "product_id")
@@ -38,5 +38,4 @@ public class Sales {
     private BigDecimal paidAmount;
     @Column(name = "in_credit")
     private Boolean inCredit;
-
 }

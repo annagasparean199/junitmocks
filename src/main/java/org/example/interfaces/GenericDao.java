@@ -1,4 +1,5 @@
 package org.example.interfaces;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -19,16 +20,10 @@ public interface GenericDao<T> {
         return sessionFactory.openSession();
     }
 
-    default Session getSession(){
-        SessionFactory sessionFactory = getSessionFactory();
-        return sessionFactory.openSession();
-    }
-
     default T findById(Long id, Class<T> entityClass) {
         Transaction transaction = null;
         T entity = null;
-        try {
-            Session session = setUp();
+        try(Session session = setUp()) {
             transaction = session.beginTransaction();
 
             CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
@@ -50,7 +45,7 @@ public interface GenericDao<T> {
     default List<T> getAllEntities(Class<T> entityClass) {
         Transaction transaction = null;
         List<T> entities = null;
-        try(Session session = setUp()) {
+        try (Session session = setUp()) {
             transaction = session.beginTransaction();
 
             CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
@@ -71,8 +66,7 @@ public interface GenericDao<T> {
 
     default void delete(T entity) {
         Transaction transaction = null;
-        try {
-            Session session = setUp();
+        try (Session session = setUp()){
             transaction = session.beginTransaction();
             session.delete(entity);
             transaction.commit();
@@ -88,8 +82,7 @@ public interface GenericDao<T> {
 
     default void deleteById(Long id) {
         Transaction transaction = null;
-        try {
-            Session session = setUp();
+        try(Session session = setUp()) {
             transaction = session.beginTransaction();
             T entity = session.get(getEntityClass(), id);
             if (entity != null) {
@@ -106,8 +99,7 @@ public interface GenericDao<T> {
 
     default void save(T entity) {
         Transaction transaction = null;
-        try {
-            Session session = setUp();
+        try(Session session = setUp()) {
             transaction = session.beginTransaction();
             session.save(entity);
             transaction.commit();
@@ -119,31 +111,17 @@ public interface GenericDao<T> {
         }
     }
 
-//    default void updateEntity(T entity) {
-//        Transaction transaction = null;
-//        try {
-//            Session session = setUp();
-//            transaction = session.beginTransaction();
-//            session.update(entity);
-//            transaction.commit();
-//        } catch (Exception e) {
-//            if (transaction != null) {
-//                transaction.rollback();
-//            }
-//            e.printStackTrace();
-//        }
-//    }
-default void updateEntity(T entity, Session session) {
-    Transaction transaction = null;
-    try {
-        transaction = session.beginTransaction();
-        session.update(entity);
-        transaction.commit();
-    } catch (Exception e) {
-        if (transaction != null) {
-            transaction.rollback();
+    default void updateEntity(T entity) {
+        Transaction transaction = null;
+        try(Session session = setUp()) {
+            transaction = session.beginTransaction();
+            session.update(entity);
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
         }
-        e.printStackTrace();
     }
-}
 }
