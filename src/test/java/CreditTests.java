@@ -1,7 +1,7 @@
 import lombok.extern.log4j.Log4j;
 
+import org.example.DAO.DAOImpl.CreditDao;
 import org.example.entity.*;
-import org.example.hibernate.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

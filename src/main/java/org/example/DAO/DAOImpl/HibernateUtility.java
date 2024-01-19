@@ -1,4 +1,4 @@
-package org.example.hibernate;
+package org.example.DAO.DAOImpl;
 
 import org.example.entity.*;
 import org.hibernate.SessionFactory;

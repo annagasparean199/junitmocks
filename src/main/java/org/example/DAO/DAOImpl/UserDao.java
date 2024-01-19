@@ -1,8 +1,7 @@
-package org.example.hibernate;
+package org.example.DAO.DAOImpl;
 
+import org.example.DAO.GenericDao;
 import org.example.entity.User;
-import org.example.interfaces.GenericDao;
-import org.hibernate.Session;
 
 import java.util.List;
 

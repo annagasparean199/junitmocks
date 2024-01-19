@@ -1,17 +1,10 @@
+import org.example.DAO.DAOImpl.CreditDao;
 import org.example.entity.*;
-import org.example.hibernate.*;
-import org.hibernate.Session;
 import org.junit.jupiter.api.Test;
 
-import java.math.BigDecimal;
-import java.time.LocalDate;
-import java.util.Date;
-import java.util.List;
+import static org.example.DAO.DAOImpl.CreditDao.getCreditDaoInstance;
+//import static org.example.hibernate.DiscountDao.getDiscountDaoInstance;
 
-import static org.example.hibernate.CreditDao.getCreditDaoInstance;
-import static org.example.hibernate.DeliveryDao.getDeliveryDaoInstance;
-import static org.example.hibernate.DiscountDao.getDiscountDaoInstance;
-import static org.example.hibernate.ProductDao.getProductDaoInstance;
 
 public class tets {
 

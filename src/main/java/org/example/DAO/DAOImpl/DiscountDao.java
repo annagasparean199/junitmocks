@@ -4,7 +4,7 @@
 //import org.example.entity.Discount;
 //import org.example.entity.Sales;
 //import org.example.entity.User;
-//import org.example.interfaces.GenericDao;
+//import org.example.DAO.GenericDao;
 //import org.hibernate.Session;
 //import org.junit.jupiter.api.Test;
 //

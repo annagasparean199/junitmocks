@@ -1,4 +1,4 @@
-package org.example.interfaces;
+package org.example.DAO;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -10,7 +10,7 @@ import javax.persistence.criteria.Root;
 
 import java.util.List;
 
-import static org.example.hibernate.HibernateUtility.getSessionFactory;
+import static org.example.DAO.DAOImpl.HibernateUtility.getSessionFactory;
 
 
 public interface GenericDao<T> {

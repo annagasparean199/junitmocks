@@ -1,9 +1,9 @@
-package org.example.hibernate;
+package org.example.DAO.DAOImpl;
 
+import org.example.DAO.GenericDao;
 import org.example.entity.Credit;
 import org.example.entity.Sales;
 import org.example.interfaces.CreditCalculations;
-import org.example.interfaces.GenericDao;
 
 import java.text.SimpleDateFormat;
 import java.time.Period;

@@ -1,7 +1,7 @@
 package utils;
 
+import org.example.DAO.DAOImpl.*;
 import org.example.entity.*;
-import org.example.hibernate.*;
 
 import java.math.BigDecimal;
 import java.util.*;
@@ -103,19 +103,19 @@ public class Utils {
         CreditDao.getCreditDaoInstance().save(credit);
 
 
-        Discount discount = Discount.builder()
-                .user(user)
-                .percentage(5.0)
-                .build();
-
-        DiscountDao.getDiscountDaoInstance().save(discount);
+//        Discount discount = Discount.builder()
+//                .user(user)
+//                .percentage(5.0)
+//                .build();
+//
+//        DiscountDao.getDiscountDaoInstance().save(discount);
 
         record.add(product);
         record.add(user);
         record.add(sales);
         record.add(delivery);
         record.add(credit);
-        record.add(discount);
+//        record.add(discount);
         return record;
     }
 
@@ -168,19 +168,19 @@ public class Utils {
                 .build();
         CreditDao.getCreditDaoInstance().save(credit);
 
-        Discount discount = Discount.builder()
-                .user(user)
-                .percentage(7.5)
-                .build();
-
-        DiscountDao.getDiscountDaoInstance().save(discount);
+//        Discount discount = Discount.builder()
+//                .user(user)
+//                .percentage(7.5)
+//                .build();
+//
+//        DiscountDao.getDiscountDaoInstance().save(discount);
 
         record.add(product);
         record.add(user);
         record.add(sales);
         record.add(delivery);
         record.add(credit);
-        record.add(discount);
+//        record.add(discount);
 
         return record;
     }

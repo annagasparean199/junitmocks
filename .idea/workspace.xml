@@ -13,8 +13,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -45,7 +45,7 @@
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "preferences.pluginManager"
+    "settings.editor.selected.configurable": "reference.idesettings.debugger.capture"
   },
   "keyToStringList": {
     "GitStage.ChangesTree.GroupingKeys": [
@@ -56,11 +56,14 @@
   }
 }]]></component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\CRME121\IdeaProjects\junitmocks\src\main\java\org\example\DAO\DAOImpl" />
+    </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Main">
+  <component name="RunManager" selected="JUnit.DeliveryTests.testCalculateStoreLossForMonth">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="org.example.Main" />
       <module name="junitmocks" />
@@ -74,11 +77,21 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="DeliveryTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="DeliveryMockTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="junitmocks" />
       <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="DeliveryTests" />
+      <option name="MAIN_CLASS_NAME" value="DeliveryMockTests" />
       <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="DeliveryMockTests.testGetStoreLossAmountForMonth" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="junitmocks" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="DeliveryMockTests" />
+      <option name="METHOD_NAME" value="testGetStoreLossAmountForMonth" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -103,23 +116,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="DeliveryTests.testCalculateStoreProfitForMonth" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="junitmocks" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="DeliveryTests" />
-      <option name="METHOD_NAME" value="testCalculateStoreProfitForMonth" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.DeliveryTests.testCalculateStoreLossForMonth" />
+        <item itemvalue="JUnit.DeliveryMockTests.testGetStoreLossAmountForMonth" />
+        <item itemvalue="JUnit.DeliveryMockTests" />
         <item itemvalue="Application.Main" />
         <item itemvalue="JUnit.DeliveryTests.assertSalesBalance" />
-        <item itemvalue="JUnit.DeliveryTests.testCalculateStoreProfitForMonth" />
-        <item itemvalue="JUnit.DeliveryTests.testCalculateStoreLossForMonth" />
-        <item itemvalue="JUnit.DeliveryTests" />
       </list>
     </recent_temporary>
   </component>
@@ -160,7 +163,14 @@
       <option name="project" value="LOCAL" />
       <updated>1705659015176</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="6">
+      <created>1705668516293</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1705668516293</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -179,7 +189,8 @@
     <MESSAGE value="3" />
     <MESSAGE value="4" />
     <MESSAGE value="5" />
-    <option name="LAST_COMMIT_MESSAGE" value="5" />
+    <MESSAGE value="6" />
+    <option name="LAST_COMMIT_MESSAGE" value="6" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -190,54 +201,13 @@
         </breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/test/java/tets.java</url>
-          <line>43</line>
+          <line>36</line>
           <option name="timeStamp" value="18" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/org/example/hibernate/DeliveryDao.java</url>
-          <line>110</line>
-          <option name="timeStamp" value="36" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/org/example/hibernate/DeliveryDao.java</url>
-          <line>111</line>
-          <option name="timeStamp" value="37" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/src/main/java/org/example/interfaces/GenericDao.java</url>
-          <line>22</line>
-          <properties class="org.example.interfaces.GenericDao" method="findById">
-            <option name="EMULATED" value="true" />
-            <option name="WATCH_EXIT" value="false" />
-          </properties>
-          <option name="timeStamp" value="30" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/src/main/java/org/example/hibernate/DeliveryDao.java</url>
-          <line>109</line>
-          <properties class="org.example.hibernate.DeliveryDao" method="getStoreSalesBalancePerMonth">
-            <option name="EMULATED" value="true" />
-            <option name="WATCH_EXIT" value="false" />
-          </properties>
-          <option name="timeStamp" value="35" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/src/main/java/org/example/hibernate/DeliveryDao.java</url>
-          <line>83</line>
-          <properties class="org.example.hibernate.DeliveryDao" method="getStoreProfitAmountForMonth">
-            <option name="EMULATED" value="true" />
-            <option name="WATCH_EXIT" value="false" />
-          </properties>
-          <option name="timeStamp" value="38" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/src/main/java/org/example/hibernate/DeliveryDao.java</url>
-          <line>64</line>
-          <properties class="org.example.hibernate.DeliveryDao" method="getStoreLossAmountForMonth">
-            <option name="EMULATED" value="true" />
-            <option name="WATCH_EXIT" value="false" />
-          </properties>
-          <option name="timeStamp" value="39" />
+          <url>file://$PROJECT_DIR$/src/main/java/org/example/DAO/GenericDao.java</url>
+          <line>18</line>
+          <option name="timeStamp" value="42" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -253,5 +223,9 @@
         <watch expression="((IllegalArgumentException)e).detailMessage.value" language="JAVA" custom="java.lang.IllegalArgumentException" />
       </configuration>
     </watches-manager>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>

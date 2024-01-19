@@ -25,7 +25,7 @@
         <mapping class="org.example.entity.User"/>
         <mapping class="org.example.entity.Delivery"/>
         <mapping class="org.example.entity.Credit"/>
-        <mapping class="org.example.entity.Discount"/>
+<!--        <mapping class="org.example.entity.Discount"/>-->
         <mapping class="org.example.entity.Product"/>
         <mapping class="org.example.entity.Sales"/>
     </session-factory>
