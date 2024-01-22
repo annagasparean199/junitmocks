@@ -29,7 +29,6 @@ public class DeliveryDao implements GenericDao<Delivery>, DeliveryCalculations {
         return session;
     }
 
-
     @Override
     public Delivery findById(Long id, Class<Delivery> entityClass) {
         Delivery entity = null;

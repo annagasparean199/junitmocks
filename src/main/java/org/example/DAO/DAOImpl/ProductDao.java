@@ -11,8 +11,6 @@ import static org.example.DAO.DAOImpl.HibernateUtility.getSessionFactory;
 
 public class ProductDao implements GenericDao<Product> {
 
-    SessionFactory sessionFactory = getSessionFactory();
-
     @Override
     public Product findById(Long id, Class<Product> entityClass) {
         return GenericDao.super.findById(id, entityClass);

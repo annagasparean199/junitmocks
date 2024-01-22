@@ -14,7 +14,7 @@ public interface CreditCalculations {
 
     double getTotalAmountForPayedCredits(Long userId);
 
-    int calculatePayedMonths(LocalDate paymentDate);
+    int calculatePayedMonths(LocalDate paymentDate, Credit credit);
 
     double getTotalAmountForRemainCredits(Long userId);
 }

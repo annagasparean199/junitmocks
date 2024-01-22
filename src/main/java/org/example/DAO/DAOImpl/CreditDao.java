@@ -12,6 +12,8 @@ import java.util.List;
 
 public class CreditDao implements GenericDao<Credit>, CreditCalculations {
 
+    SalesDao salesDao = new SalesDao();
+
     @Override
     public Credit findById(Long id, Class<Credit> entityClass) {
         return GenericDao.super.findById(id, entityClass);
@@ -49,8 +51,7 @@ public class CreditDao implements GenericDao<Credit>, CreditCalculations {
     }
 
     public Credit findCreditBySalesId(Long salesId) {
-        CreditDao creditDao = new CreditDao();
-        List<Credit> creditList = creditDao.getAllEntities(Credit.class);
+        List<Credit> creditList = getAllEntities(Credit.class);
 
         for (Credit credit : creditList) {
             if (credit.getSales() != null && credit.getSales().getId().equals(salesId)) {
@@ -63,7 +64,6 @@ public class CreditDao implements GenericDao<Credit>, CreditCalculations {
     @Override
     public Double getTotalPriceForOneCredit(Long productId, Long userId) {
 
-        SalesDao salesDao = new SalesDao();
         List<Sales> salesList = salesDao.getAllEntities(Sales.class);
         Long salesId = null;
 
@@ -82,7 +82,6 @@ public class CreditDao implements GenericDao<Credit>, CreditCalculations {
     @Override
     public Double getTotalPriceForPersonCreditsPerMonth(Long userId, int month) {
 
-        SalesDao salesDao = new SalesDao();
         List<Sales> salesList = salesDao.getAllEntities(Sales.class);
         double result = 0d;
 
@@ -97,7 +96,6 @@ public class CreditDao implements GenericDao<Credit>, CreditCalculations {
                         result += credit.getPricePerMonth().doubleValue();
                     }
                 }
-
             }
         }
         return result;
@@ -105,7 +103,6 @@ public class CreditDao implements GenericDao<Credit>, CreditCalculations {
 
     @Override
     public double getTotalAmountForPayedCredits(Long userId) {
-        SalesDao salesDao = new SalesDao();
         List<Sales> salesList = salesDao.getAllEntities(Sales.class);
         double totalAmountForPayedCredits = 0d;
 
@@ -114,11 +111,12 @@ public class CreditDao implements GenericDao<Credit>, CreditCalculations {
                 Long salesId = Long.parseLong(sales.getId().toString());
                 Credit credit = findCreditBySalesId(salesId);
                 if (credit != null) {
-                    LocalDate paymentDate = LocalDate.parse(new SimpleDateFormat("yyyy-MM-dd").format(credit.getPaymentDate()));
+                    LocalDate paymentDate = LocalDate.parse(new SimpleDateFormat("yyyy-MM-dd")
+                            .format(credit.getPaymentDate()));
 
-                    if (paymentDate.isAfter(LocalDate.now())) {
-                        int payedMonths = calculatePayedMonths(paymentDate);
-                        totalAmountForPayedCredits += credit.getPricePerMonth().doubleValue() * payedMonths;
+                    if (paymentDate.isBefore(LocalDate.now())) {
+               int realPayedMonths = calculatePayedMonths(paymentDate, credit);
+                        totalAmountForPayedCredits += credit.getPricePerMonth().doubleValue() * realPayedMonths;
                     }
                 }
             }
@@ -128,17 +126,15 @@ public class CreditDao implements GenericDao<Credit>, CreditCalculations {
     }
 
     @Override
-    public int calculatePayedMonths(LocalDate paymentDate) {
-        int currentMonth = LocalDate.now().getMonthValue();
-        int paymentMonth = paymentDate.getMonthValue();
-        int remainingMonths = paymentMonth - currentMonth;
-
-        return Math.max(remainingMonths, 0);
+    public int calculatePayedMonths(LocalDate paymentDate, Credit credit) {
+        Period period = Period.between(paymentDate, LocalDate.now());
+        int monthDifference = credit.getMonths() - (period.getYears() * 12 + period.getMonths());
+        int payedMonths =  credit.getMonths() - monthDifference;
+        return Math.max(payedMonths, 0);
     }
 
     @Override
     public double getTotalAmountForRemainCredits(Long userId) {
-        SalesDao salesDao = new SalesDao();
         List<Sales> salesList = salesDao.getAllEntities(Sales.class);
         double totalAmountForRemainCredits = 0d;
 
@@ -149,7 +145,7 @@ public class CreditDao implements GenericDao<Credit>, CreditCalculations {
                 if (credit != null) {
                     LocalDate paymentDate = LocalDate.parse(new SimpleDateFormat("yyyy-MM-dd").format(credit.getPaymentDate()));
 
-                    int remainMonths = credit.getMonths() - calculatePayedMonths(paymentDate);
+                    int remainMonths = credit.getMonths() - calculatePayedMonths(paymentDate, credit);
                     totalAmountForRemainCredits += credit.getPricePerMonth().doubleValue() * remainMonths;
                 }
             }

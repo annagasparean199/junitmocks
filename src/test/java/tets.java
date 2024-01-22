@@ -6,14 +6,24 @@ import org.example.DAO.DAOImpl.DeliveryDao;
 import org.example.entity.Delivery;
 import utils.Utils;
 
+import java.security.Timestamp;
+import java.util.Date;
+
+import static utils.Utils.credit;
+
 public class tets {
 
     public static void main(String[] args) {
-        Utils.getRecord();
-        DeliveryDao deliveryDao = new DeliveryDao();
-        System.out.println(deliveryDao.getAllEntities(Delivery.class));
+//        Utils.getRecord();
+//        DeliveryDao deliveryDao = new DeliveryDao();
+//        System.out.println(deliveryDao.getAllEntities(Delivery.class));
+
+        long timestamp = 1698799000000L;
+        Date sec = new Date(1672531200000L);
+        Date date = new Date(timestamp);
+        System.out.println(date);
     }
-    
+
 }
 //     static CreditDao creditDao = getCreditDaoInstance();
 //    static SalesDao salesDao = SalesDao.getSalesDaoInstance();

@@ -11,7 +11,6 @@ import java.util.List;
 
 
 public class SalesDao implements GenericDao<Sales>, SalesCalculations {
-    ProductDao productDao = new ProductDao();
 
     @Override
     public Sales findById(Long id, Class<Sales> entityClass) {
@@ -77,6 +76,7 @@ public class SalesDao implements GenericDao<Sales>, SalesCalculations {
 
     @Override
     public double getPriceWithDiscount(double discount, Long productId) {
+        ProductDao productDao = new ProductDao();
         Product product = productDao.findById(productId,Product.class);
         return product.getPrice() - (product.getPrice()/100*discount);
     }
