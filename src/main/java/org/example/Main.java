@@ -1,7 +1,7 @@
 package org.example;
 
-//import org.example.hibernate.DiscountDao;
 import org.example.DAO.DAOImpl.HibernateUtility;
+import org.example.entity.Delivery;
 import org.hibernate.SessionFactory;
 
 public class Main {
@@ -10,5 +10,6 @@ public class Main {
 
         SessionFactory sessionFactory =  HibernateUtility.getSessionFactory();
         sessionFactory.openSession();
+
     }
 }

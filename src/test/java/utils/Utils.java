@@ -16,119 +16,117 @@ public class Utils {
     public static Credit credit = new Credit(1L, new BigDecimal("30.0"), 12, sales2, new Date());
     public static Delivery delivery1 = new Delivery(1L, new Date(), 5, product1);
     public static Delivery delivery2 = new Delivery(2L, new Date(), 3, product2);
-}
-//
-//    public static Long getRecord() {
-//
-//        List<Object> list = getFirstRecord();
-//        Product product = Product.builder()
-//                .color("Red")
-//                .quantity(100)
-//                .name("Example Product")
-//                .price(50.0)
-//                .inStock(true)
-//                .build();
-//        ProductDao.getProductDaoInstance().save(product);
-//
-//        Sales sales = Sales.builder()
-//                .product(product)
-//                .user((User) list.get(1))
-//                .purchaseDate(new Date())
-//                .quantity(5)
-//                .paidAmount(new BigDecimal("250.00"))
-//                .inCredit(true)
-//                .build();
-//        SalesDao.getSalesDaoInstance().save(sales);
-//
-//        Delivery delivery = Delivery.builder()
-//                .deliveryDate(new Date())
-//                .quantity(3)
-//                .product(product)
-//                .build();
-//        //DeliveryDao.getDeliveryDaoInstance().save(delivery);
-//
-//
-//        Credit credit = Credit.builder()
-//                .pricePerMonth(new BigDecimal("1000.00"))
-//                .months(12)
-//                .sales(SalesDao.getSalesDaoInstance().findById(2L, Sales.class))
-//                .paymentDate(new Date())
-//                .build();
-//        CreditDao.getCreditDaoInstance().save(credit);
+
+    public static void getRecord() {
+
+        List<Object> list = getFirstRecord();
+        Product product = Product.builder()
+                .color("Red")
+                .quantity(100)
+                .name("Example Product")
+                .price(50.0)
+                .inStock(true)
+                .build();
+        ProductDao productDao = new ProductDao();
+        productDao.save(product);
+
+        Sales sales = Sales.builder()
+                .product(product)
+                .user((User) list.get(1))
+                .purchaseDate(new Date())
+                .quantity(5)
+                .paidAmount(new BigDecimal("250.00"))
+                .inCredit(true)
+                .build();
+        SalesDao salesDao = new SalesDao();
+        salesDao.save(sales);
+
+        Delivery delivery = Delivery.builder()
+                .deliveryDate(new Date())
+                .quantity(3)
+                .product(product)
+                .build();
+        DeliveryDao deliveryDao = new DeliveryDao();
+        deliveryDao.save(delivery);
+
+
+        Credit credit = Credit.builder()
+                .pricePerMonth(new BigDecimal("1000.00"))
+                .months(12)
+                .sales(salesDao.findById(2L, Sales.class))
+                .paymentDate(new Date())
+                .build();
+        CreditDao creditDao = new CreditDao();
+        creditDao.save(credit);
 //        User user = (User) list.get(1);
 //
 //        return user.getId();
-//    }
-//
-//
-//    public static List<Object> getFirstRecord() {
-//
-//        List<Object> record = new ArrayList<>();
-//
-//        Product product = Product.builder()
-//                .color("Red")
-//                .quantity(100)
-//                .name("Example Product")
-//                .price(50.0)
-//                .inStock(true)
-//                .build();
-//        ProductDao.getProductDaoInstance().save(product);
-//
-//        User user = User.builder()
-//                .salary(50000.0)
-//                .uuid(UUID.randomUUID())
-//                .legalEntity(true)
-//                .company("Example Company")
-//                .name("John Doe")
-//                .build();
-//        UserDao.getUserDaoInstance().save(user);
-//
-//        long timestamp = 1709459200000L; //1.12.2023
-//        Date date = new Date(timestamp);
-//
-//        Sales sales = Sales.builder()
-//                .product(product)
-//                .user(user)
-//                .purchaseDate(date)
-//                .quantity(5)
-//                .paidAmount(new BigDecimal("250.00"))
-//                .inCredit(true)
-//                .build();
-//        SalesDao.getSalesDaoInstance().save(sales);
-//
-//        Delivery delivery = Delivery.builder()
-//                .deliveryDate(new Date())
-//                .quantity(3)
-//                .product(product)
-//                .build();
-//     //   DeliveryDao.getDeliveryDaoInstance().save(delivery);
-//
-//
-//        Credit credit = Credit.builder()
-//                .pricePerMonth(new BigDecimal("1000.00"))
-//                .months(12)
-//                .sales(SalesDao.getSalesDaoInstance().findById(1L, Sales.class))
-//                .paymentDate(new Date())
-//                .build();
-//        CreditDao.getCreditDaoInstance().save(credit);
-//
-//
-////        Discount discount = Discount.builder()
-////                .user(user)
-////                .percentage(5.0)
-////                .build();
-////
-////        DiscountDao.getDiscountDaoInstance().save(discount);
-//
-//        record.add(product);
-//        record.add(user);
-//        record.add(sales);
-//        record.add(delivery);
-//        record.add(credit);
-////        record.add(discount);
-//        return record;
-//    }
-//
+    }
+
+
+    public static List<Object> getFirstRecord() {
+
+        List<Object> record = new ArrayList<>();
+
+        Product product = Product.builder()
+                .color("Red")
+                .quantity(100)
+                .name("Example Product")
+                .price(50.0)
+                .inStock(true)
+                .build();
+        ProductDao productDao = new ProductDao();
+        productDao.save(product);
+
+        User user = User.builder()
+                .salary(50000.0)
+                .uuid(UUID.randomUUID())
+                .legalEntity(true)
+                .company("Example Company")
+                .name("John Doe")
+                .build();
+        UserDao.getUserDaoInstance().save(user);
+
+        long timestamp = 1709459200000L; //1.12.2023
+        Date date = new Date(timestamp);
+
+        Sales sales = Sales.builder()
+                .product(product)
+                .user(user)
+                .purchaseDate(date)
+                .quantity(5)
+                .paidAmount(new BigDecimal("250.00"))
+                .inCredit(true)
+                .build();
+        SalesDao salesDao = new SalesDao();
+        salesDao.save(sales);
+
+        Delivery delivery = Delivery.builder()
+                .deliveryDate(new Date())
+                .quantity(3)
+                .product(product)
+                .build();
+        DeliveryDao deliveryDao = new DeliveryDao();
+        deliveryDao.save(delivery);
+
+
+        Credit credit = Credit.builder()
+                .pricePerMonth(new BigDecimal("1000.00"))
+                .months(12)
+                .sales(salesDao.findById(1L, Sales.class))
+                .paymentDate(new Date())
+                .build();
+        CreditDao creditDao = new CreditDao();
+        creditDao.save(credit);
+
+        record.add(product);
+        record.add(user);
+        record.add(sales);
+        record.add(delivery);
+        record.add(credit);
+        return record;
+    }
+
 //    public static List<Object> getSecRecord() {
 //
 //        List<Object> record = new LinkedList<>();
@@ -194,4 +192,4 @@ public class Utils {
 //
 //        return record;
 //    }
-//}
+}

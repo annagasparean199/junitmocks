@@ -8,8 +8,8 @@
         <property name="hibernate.connection.url">
             jdbc:mysql://localhost:3306/store
         </property>
-        <property name="hibernate.connection.username">Anna</property>
-        <property name="hibernate.connection.password">Anna12345!</property>
+        <property name="hibernate.connection.username">root</property>
+        <property name="hibernate.connection.password">Anna123!</property>
 
         <property name="hibernate.dialect">org.hibernate.dialect.MySQL8Dialect</property>
 
@@ -25,7 +25,6 @@
         <mapping class="org.example.entity.User"/>
         <mapping class="org.example.entity.Delivery"/>
         <mapping class="org.example.entity.Credit"/>
-<!--        <mapping class="org.example.entity.Discount"/>-->
         <mapping class="org.example.entity.Product"/>
         <mapping class="org.example.entity.Sales"/>
     </session-factory>

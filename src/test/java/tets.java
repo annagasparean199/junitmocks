@@ -1,13 +1,20 @@
-//import org.example.DAO.DAOImpl.CreditDao;
-//import org.example.entity.*;
-//import org.junit.jupiter.api.Test;
-//
 //import static org.example.DAO.DAOImpl.CreditDao.getCreditDaoInstance;
 //import static org.example.hibernate.DiscountDao.getDiscountDaoInstance;
-//
-//
-//public class tets {
-//
+
+
+import org.example.DAO.DAOImpl.DeliveryDao;
+import org.example.entity.Delivery;
+import utils.Utils;
+
+public class tets {
+
+    public static void main(String[] args) {
+        Utils.getRecord();
+        DeliveryDao deliveryDao = new DeliveryDao();
+        System.out.println(deliveryDao.getAllEntities(Delivery.class));
+    }
+    
+}
 //     static CreditDao creditDao = getCreditDaoInstance();
 //    static SalesDao salesDao = SalesDao.getSalesDaoInstance();
 //        static DiscountDao discountDao = getDiscountDaoInstance();

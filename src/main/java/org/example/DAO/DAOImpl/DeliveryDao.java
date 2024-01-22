@@ -48,32 +48,82 @@ public class DeliveryDao implements GenericDao<Delivery>, DeliveryCalculations {
 
     @Override
     public List<Delivery> getAllEntities(Class<Delivery> entityClass) {
-        return GenericDao.super.getAllEntities(entityClass);
+        List<Delivery> entities = null;
+        try (Session session = setUp()) {
+            transaction = session.beginTransaction();
+            entities = session.createQuery("FROM " + entityClass.getName(), entityClass)
+                    .list();
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+        }
+        return entities;
     }
 
     @Override
     public void delete(Delivery entity) {
-        GenericDao.super.delete(entity);
+        try (Session session = setUp()){
+            transaction = session.beginTransaction();
+            session.delete(entity);
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+        }
     }
 
     @Override
     public Class<Delivery> getEntityClass() {
-        return Delivery.class;
+        return null;
     }
 
     @Override
     public void deleteById(Long id) {
-        GenericDao.super.deleteById(id);
+        try(Session session = setUp()) {
+            transaction = session.beginTransaction();
+            Delivery entity = session.get(Delivery.class, id);
+            if (entity != null) {
+                session.delete(entity);
+            }
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+        }
     }
-
     @Override
     public void save(Delivery entity) {
-        GenericDao.super.save(entity);
+        try(Session session = setUp()) {
+            transaction = session.beginTransaction();
+            session.save(entity);
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void updateEntity(Delivery entity) {
-        GenericDao.super.updateEntity(entity);
+        try(Session session = setUp()) {
+            transaction = session.beginTransaction();
+            session.update(entity);
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+        }
     }
 
 
