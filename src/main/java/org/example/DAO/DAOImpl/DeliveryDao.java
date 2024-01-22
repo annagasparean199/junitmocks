@@ -21,12 +21,12 @@ public class DeliveryDao implements GenericDao<Delivery>, DeliveryCalculations {
 
     SalesDao salesDao = new SalesDao();
     CreditDao creditDao = new CreditDao();
-    SessionFactory sessionFactory;
+    Session session;
     Transaction transaction;
 
     public Session setUp(){
-        sessionFactory = getSessionFactory();
-        return sessionFactory.openSession();
+        session = getSessionFactory().openSession();
+        return session;
     }
 
 

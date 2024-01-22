@@ -31,8 +31,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 import static utils.Utils.*;
 
 public class DeliveryTests {
@@ -55,8 +54,8 @@ public class DeliveryTests {
     @Mock
     SessionFactory sessionFactoryMock = mock(SessionFactory.class);
 
-    @Spy
     @InjectMocks
+    @Spy
     private DeliveryDao deliveryDao;
 
 
@@ -79,8 +78,6 @@ public class DeliveryTests {
 
     @Test
     public void assertSalesBalance() {
-
-
         when(deliveryDao.getAllEntities(Delivery.class)).thenReturn(Arrays.asList(delivery1, delivery2));
         when(salesDaoMock.getAllEntities(Sales.class)).thenReturn(Arrays.asList(sales1, sales2));
         when(creditDaoMock.getAllEntities(Credit.class)).thenReturn(Collections.singletonList(credit));
@@ -89,21 +86,20 @@ public class DeliveryTests {
         Assertions.assertEquals(30, result);
     }
 
-    @Test
-    public void testFindById() {
-        when(genericDao.setUp()).thenReturn(session);
-        when(session.beginTransaction()).thenReturn(transaction);
-
-        Delivery delivery = deliveryDao.findById(1L, Delivery.class);
-        Assertions.assertEquals(delivery1, delivery);
-    }
+//    @Test
+//    public void testFindById() {
+//        when(genericDao.setUp()).thenReturn(session);
+//        when(session.beginTransaction()).thenReturn(transaction);
+//
+//        Delivery delivery = deliveryDao.findById(1L, Delivery.class);
+//        Assertions.assertEquals(delivery1, delivery);
+//    }
 
     @Test
     public void testFindById_EntityFound() {
-        when(deliveryDao.setUp()).thenReturn(session);
-        when(session.beginTransaction()).thenReturn(transaction);
-        when(session.get(eq(Delivery.class), eq(1L)))
-                .thenReturn(delivery1);
+        doReturn(session).when(deliveryDao).setUp();
+        doReturn(transaction).when(session).beginTransaction();
+        doReturn(delivery1).when(session).get(eq(Delivery.class), eq(1L));
 
         Delivery result = deliveryDao.findById(1L, Delivery.class);
         assertNotNull(result);
