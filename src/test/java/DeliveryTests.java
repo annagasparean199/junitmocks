@@ -1,72 +1,155 @@
 import org.example.DAO.DAOImpl.*;
-import org.example.entity.Delivery;
-import org.example.entity.Product;
-import org.junit.jupiter.api.AfterEach;
+import org.example.DAO.GenericDao;
+import org.example.entity.*;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+
+import org.hibernate.query.Query;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.mockito.Spy;
+
+
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 
 import java.util.Arrays;
-import java.util.Date;
+import java.util.Collections;
 
+
+import static org.hamcrest.CoreMatchers.any;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
-import static utils.Utils.getRecord;
+import static utils.Utils.*;
 
 public class DeliveryTests {
-
-    @AfterEach
-    public void clear() {
-    }
-
-//    @Mock
-//    private ProductDao productDaoMock;
-//
-//    @Mock
-//    private SalesDao salesDaoMock;
-//
-//    @Mock
-//    private CreditDao creditDaoMock;
 
     @BeforeEach
     public void setUp() {
         MockitoAnnotations.openMocks(this);
-        rtt = new rtt(deliveryDao);
     }
-    @Mock
-    private DeliveryDao deliveryDao;
 
+    @Mock
+    private SalesDao salesDaoMock;
+    @Mock
+    private CreditDao creditDaoMock;
+    @Mock
+    Session session = mock(Session.class);
+    @Mock
+    Transaction transaction = mock(Transaction.class);
+    @Spy
+    GenericDao<DeliveryDao> genericDao;
+    @Mock
+    SessionFactory sessionFactoryMock = mock(SessionFactory.class);
+
+    @Spy
     @InjectMocks
-    private rtt rtt;
+    private DeliveryDao deliveryDao;
 
 
     @Test
     public void testCalculateStoreLossForMonth() {
-        //getRecord();
-        Product product1 = new Product(1L, "Red", 10, "Widget A", 19.99, true);
-        Product product2 = new Product(2L, "Blue", 5, "Widget B", 29.99, false);
-        Delivery delivery1 = new Delivery(101L, new Date(), 5, product1);
-        Delivery delivery2 = new Delivery(102L, new Date(), 3, product2);
         when(deliveryDao.getAllEntities(Delivery.class)).thenReturn(Arrays.asList(delivery1, delivery2));
+        double result = deliveryDao.getStoreLossAmountForMonth(1);
 
-        Assertions.assertEquals(300.0, rtt.getStoreLossAmountForMonth(1));
+        Assertions.assertEquals(190.0, result);
     }
 
-//    @Test
-//    public void testCalculateStoreProfitForMonth() {
-//        getRecord();
-//        Assertions.assertEquals(2250, DeliveryDao.getDeliveryDaoInstance().getStoreProfitAmountForMonth(1));
+
+    @Test
+    public void testCalculateStoreProfitForMonth() {
+        when(salesDaoMock.getAllEntities(Sales.class)).thenReturn(Arrays.asList(sales1, sales2));
+        when(creditDaoMock.getAllEntities(Credit.class)).thenReturn(Collections.singletonList(credit));
+
+        Assertions.assertEquals(220, deliveryDao.getStoreProfitAmountForMonth(1));
+    }
+
+    @Test
+    public void assertSalesBalance() {
+
+
+        when(deliveryDao.getAllEntities(Delivery.class)).thenReturn(Arrays.asList(delivery1, delivery2));
+        when(salesDaoMock.getAllEntities(Sales.class)).thenReturn(Arrays.asList(sales1, sales2));
+        when(creditDaoMock.getAllEntities(Credit.class)).thenReturn(Collections.singletonList(credit));
+
+        double result = deliveryDao.getStoreSalesBalancePerMonth(1);
+        Assertions.assertEquals(30, result);
+    }
+
+    @Test
+    public void testFindById() {
+        when(genericDao.setUp()).thenReturn(session);
+        when(session.beginTransaction()).thenReturn(transaction);
+
+        Delivery delivery = deliveryDao.findById(1L, Delivery.class);
+        Assertions.assertEquals(delivery1, delivery);
+    }
+
+    @Test
+    public void testFindById_EntityFound() {
+        when(deliveryDao.setUp()).thenReturn(session);
+        when(session.beginTransaction()).thenReturn(transaction);
+        when(session.get(eq(Delivery.class), eq(1L)))
+                .thenReturn(delivery1);
+
+        Delivery result = deliveryDao.findById(1L, Delivery.class);
+        assertNotNull(result);
+        Assertions.assertEquals(delivery1,result);
+    }
+
+}
+//
+//    @Override
+//    public List<Delivery> getAllEntities(Class<Delivery> entityClass) {
+//        return GenericDao.super.getAllEntities(entityClass);
 //    }
 //
+//    @Override
+//    public void delete(Delivery entity) {
+//        GenericDao.super.delete(entity);
+//    }
+//
+//    @Override
+//    public Class<Delivery> getEntityClass() {
+//        return Delivery.class;
+//    }
+//
+//    @Override
+//    public void deleteById(Long id) {
+//        GenericDao.super.deleteById(id);
+//    }
+//
+//    @Override
+//    public void save(Delivery entity) {
+//        GenericDao.super.save(entity);
+//    }
+//
+//    @Override
+//    public void updateEntity(Delivery entity) {
+//        GenericDao.super.updateEntity(entity);
+//    }
+
+
 //    @Test
 //    public void assertSalesBalance() {
 //        getRecord();
 //        double result = DeliveryDao.getDeliveryDaoInstance().getStoreSalesBalancePerMonth(1);
 //        Assertions.assertEquals(1950, result);
 //    }
-}
+//}
 //    @Test
 //    public void testCalculateStoreLossForMonth(){
 //        Product product = new Product(color, quantity, name, price = 10, inStock);

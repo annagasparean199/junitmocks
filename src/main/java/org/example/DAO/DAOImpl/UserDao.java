@@ -2,12 +2,17 @@ package org.example.DAO.DAOImpl;
 
 import org.example.DAO.GenericDao;
 import org.example.entity.User;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 
 import java.util.List;
+
+import static org.example.DAO.DAOImpl.HibernateUtility.getSessionFactory;
 
 public class UserDao implements GenericDao<User> {
 
     private static UserDao instance;
+    SessionFactory sessionFactory = getSessionFactory();
 
     public static synchronized UserDao getUserDaoInstance() {
         if (instance == null) {

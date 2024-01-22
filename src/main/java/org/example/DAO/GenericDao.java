@@ -15,7 +15,7 @@ import static org.example.DAO.DAOImpl.HibernateUtility.getSessionFactory;
 
 public interface GenericDao<T> {
 
-    private Session setUp() {
+    default Session setUp() {
         SessionFactory sessionFactory = getSessionFactory();
         return sessionFactory.openSession();
     }
@@ -25,13 +25,7 @@ public interface GenericDao<T> {
         T entity = null;
         try(Session session = setUp()) {
             transaction = session.beginTransaction();
-
-            CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
-            CriteriaQuery<T> query = criteriaBuilder.createQuery(entityClass);
-            Root<T> root = query.from(entityClass);
-            query.select(root).where(criteriaBuilder.equal(root.get("id"), id));
-
-            entity = session.createQuery(query).uniqueResult();
+            entity = session.get(entityClass, id);
             transaction.commit();
         } catch (Exception e) {
             if (transaction != null) {
@@ -47,13 +41,8 @@ public interface GenericDao<T> {
         List<T> entities = null;
         try (Session session = setUp()) {
             transaction = session.beginTransaction();
-
-            CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
-            CriteriaQuery<T> query = criteriaBuilder.createQuery(entityClass);
-            Root<T> root = query.from(entityClass);
-            query.select(root);
-
-            entities = session.createQuery(query).list();
+            entities = session.createQuery("FROM " + entityClass.getName(), entityClass)
+                    .list();
             transaction.commit();
         } catch (Exception e) {
             if (transaction != null) {

@@ -9,15 +9,9 @@ import org.example.interfaces.SalesCalculations;
 import java.time.Year;
 import java.util.List;
 
-public class SalesDao implements GenericDao<Sales>, SalesCalculations {
-    private static SalesDao instance;
 
-    public static synchronized SalesDao getSalesDaoInstance() {
-        if (instance == null) {
-            instance = new SalesDao();
-        }
-        return instance;
-    }
+public class SalesDao implements GenericDao<Sales>, SalesCalculations {
+    ProductDao productDao = new ProductDao();
 
     @Override
     public Sales findById(Long id, Class<Sales> entityClass) {
@@ -63,8 +57,8 @@ public class SalesDao implements GenericDao<Sales>, SalesCalculations {
             percentage += 5;
         }
 
-        double sumOfPurchases = SalesDao.getSalesDaoInstance()
-                .getAllEntities(Sales.class)
+        double sumOfPurchases =
+                getAllEntities(Sales.class)
                 .stream()
                 .filter(sale -> sale.getUser().getId().equals(userId))
                 .mapToDouble(sale -> sale.getPaidAmount().doubleValue())
@@ -83,13 +77,13 @@ public class SalesDao implements GenericDao<Sales>, SalesCalculations {
 
     @Override
     public double getPriceWithDiscount(double discount, Long productId) {
-        Product product = ProductDao.getProductDaoInstance().findById(productId,Product.class);
+        Product product = productDao.findById(productId,Product.class);
         return product.getPrice() - (product.getPrice()/100*discount);
     }
 
     @Override
     public double getFullPriceFromPaidAmount(Long salesId){
-        Sales sales = SalesDao.getSalesDaoInstance().findById(salesId, Sales.class);
+        Sales sales = findById(salesId, Sales.class);
         Product product = sales.getProduct();
         return product.getPrice() - (sales.getPaidAmount().doubleValue()/ product.getPrice() * 100);
     }

@@ -5,7 +5,6 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
 public class HibernateUtility {
-
     private static final SessionFactory sessionFactory;
 
     static {
@@ -14,7 +13,6 @@ public class HibernateUtility {
 
             configuration.addAnnotatedClass(Sales.class);
             configuration.addAnnotatedClass(Delivery.class);
-        //    configuration.addAnnotatedClass(Discount.class);
             configuration.addAnnotatedClass(User.class);
             configuration.addAnnotatedClass(Product.class);
             configuration.addAnnotatedClass(Credit.class);

@@ -2,19 +2,16 @@ package org.example.DAO.DAOImpl;
 
 import org.example.DAO.GenericDao;
 import org.example.entity.Product;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 
 import java.util.List;
 
+import static org.example.DAO.DAOImpl.HibernateUtility.getSessionFactory;
+
 public class ProductDao implements GenericDao<Product> {
 
-    private static ProductDao instance;
-
-    public static synchronized ProductDao getProductDaoInstance() {
-        if (instance == null) {
-            instance = new ProductDao();
-        }
-        return instance;
-    }
+    SessionFactory sessionFactory = getSessionFactory();
 
     @Override
     public Product findById(Long id, Class<Product> entityClass) {

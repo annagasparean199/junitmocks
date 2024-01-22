@@ -4,7 +4,6 @@ import org.example.DAO.GenericDao;
 import org.example.entity.Credit;
 import org.example.entity.Sales;
 import org.example.interfaces.CreditCalculations;
-
 import java.text.SimpleDateFormat;
 import java.time.Period;
 
@@ -12,15 +11,6 @@ import java.time.LocalDate;
 import java.util.List;
 
 public class CreditDao implements GenericDao<Credit>, CreditCalculations {
-
-    private static CreditDao instance;
-
-    public static synchronized CreditDao getCreditDaoInstance() {
-        if (instance == null) {
-            instance = new CreditDao();
-        }
-        return instance;
-    }
 
     @Override
     public Credit findById(Long id, Class<Credit> entityClass) {
@@ -59,7 +49,7 @@ public class CreditDao implements GenericDao<Credit>, CreditCalculations {
     }
 
     public Credit findCreditBySalesId(Long salesId) {
-        CreditDao creditDao = CreditDao.getCreditDaoInstance();
+        CreditDao creditDao = new CreditDao();
         List<Credit> creditList = creditDao.getAllEntities(Credit.class);
 
         for (Credit credit : creditList) {
@@ -73,7 +63,7 @@ public class CreditDao implements GenericDao<Credit>, CreditCalculations {
     @Override
     public Double getTotalPriceForOneCredit(Long productId, Long userId) {
 
-        SalesDao salesDao = SalesDao.getSalesDaoInstance();
+        SalesDao salesDao = new SalesDao();
         List<Sales> salesList = salesDao.getAllEntities(Sales.class);
         Long salesId = null;
 
@@ -92,7 +82,7 @@ public class CreditDao implements GenericDao<Credit>, CreditCalculations {
     @Override
     public Double getTotalPriceForPersonCreditsPerMonth(Long userId, int month) {
 
-        SalesDao salesDao = SalesDao.getSalesDaoInstance();
+        SalesDao salesDao = new SalesDao();
         List<Sales> salesList = salesDao.getAllEntities(Sales.class);
         double result = 0d;
 
@@ -115,7 +105,7 @@ public class CreditDao implements GenericDao<Credit>, CreditCalculations {
 
     @Override
     public double getTotalAmountForPayedCredits(Long userId) {
-        SalesDao salesDao = SalesDao.getSalesDaoInstance();
+        SalesDao salesDao = new SalesDao();
         List<Sales> salesList = salesDao.getAllEntities(Sales.class);
         double totalAmountForPayedCredits = 0d;
 
@@ -123,19 +113,19 @@ public class CreditDao implements GenericDao<Credit>, CreditCalculations {
             if (sales.getUser().getId().equals(userId)) {
                 Long salesId = Long.parseLong(sales.getId().toString());
                 Credit credit = findCreditBySalesId(salesId);
-            if (credit != null) {
-                LocalDate paymentDate = LocalDate.parse(new SimpleDateFormat("yyyy-MM-dd").format(credit.getPaymentDate()));
+                if (credit != null) {
+                    LocalDate paymentDate = LocalDate.parse(new SimpleDateFormat("yyyy-MM-dd").format(credit.getPaymentDate()));
 
-                if (paymentDate.isAfter(LocalDate.now())) {
-                    int payedMonths = calculatePayedMonths(paymentDate);
-                    totalAmountForPayedCredits += credit.getPricePerMonth().doubleValue() * payedMonths;
+                    if (paymentDate.isAfter(LocalDate.now())) {
+                        int payedMonths = calculatePayedMonths(paymentDate);
+                        totalAmountForPayedCredits += credit.getPricePerMonth().doubleValue() * payedMonths;
+                    }
                 }
             }
         }
-    }
 
         return totalAmountForPayedCredits;
-}
+    }
 
     @Override
     public int calculatePayedMonths(LocalDate paymentDate) {
@@ -148,7 +138,7 @@ public class CreditDao implements GenericDao<Credit>, CreditCalculations {
 
     @Override
     public double getTotalAmountForRemainCredits(Long userId) {
-        SalesDao salesDao = SalesDao.getSalesDaoInstance();
+        SalesDao salesDao = new SalesDao();
         List<Sales> salesList = salesDao.getAllEntities(Sales.class);
         double totalAmountForRemainCredits = 0d;
 
@@ -159,11 +149,11 @@ public class CreditDao implements GenericDao<Credit>, CreditCalculations {
                 if (credit != null) {
                     LocalDate paymentDate = LocalDate.parse(new SimpleDateFormat("yyyy-MM-dd").format(credit.getPaymentDate()));
 
-                    int remainMonths = credit.getMonths()-calculatePayedMonths(paymentDate);
-                        totalAmountForRemainCredits += credit.getPricePerMonth().doubleValue() * remainMonths;
-                    }
+                    int remainMonths = credit.getMonths() - calculatePayedMonths(paymentDate);
+                    totalAmountForRemainCredits += credit.getPricePerMonth().doubleValue() * remainMonths;
                 }
             }
+        }
 
         return totalAmountForRemainCredits;
     }
