@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
+import java.util.List;
 import java.util.UUID;
 
 @Data
@@ -26,7 +27,6 @@ public class User {
     private Double salary;
 
     @Column(name = "uuid")
-    //@Type(type = "uuid-char")
     private UUID uuid;
 
     @Column(name = "legal_entity")
@@ -37,4 +37,7 @@ public class User {
 
     @Column(name = "name")
     private String name;
+
+//    @OneToMany(mappedBy = "user_id", fetch = FetchType.LAZY)
+//    private List<Sales> sales;
 }

@@ -1,16 +1,15 @@
+package DAOtests;
+
 import lombok.extern.log4j.Log4j;
 
 import org.example.DAO.DAOImpl.CreditDao;
-import org.example.DAO.DAOImpl.ProductDao;
 import org.example.DAO.DAOImpl.SalesDao;
-
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
 
 import org.example.entity.Credit;
-import org.example.entity.Product;
 import org.example.entity.Sales;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -138,6 +137,7 @@ public class CreditTests {
     @Test
     public void getTotalPriceForOneCredit() {
         credit.setMonths(3);
+        credit.setPaymentDate(new Date());
         credit.setPricePerMonth(BigDecimal.valueOf(20.0));
         when(salesDaoMock.getAllEntities(Sales.class)).thenReturn(Arrays.asList(sales1, sales2));
         when(creditDao.findCreditBySalesId(eq(sales1.getId()))).thenReturn(credit);

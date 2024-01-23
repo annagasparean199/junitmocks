@@ -3,6 +3,7 @@ package org.example.DAO.DAOImpl;
 import org.example.DAO.GenericDao;
 import org.example.entity.Credit;
 import org.example.entity.Delivery;
+import org.example.entity.Product;
 import org.example.entity.Sales;
 import org.example.interfaces.CreditCalculations;
 import org.hibernate.Session;
@@ -19,7 +20,6 @@ import static org.example.DAO.DAOImpl.HibernateUtility.getSessionFactory;
 public class CreditDao implements GenericDao<Credit>, CreditCalculations {
 
     SalesDao salesDao = new SalesDao();
-
     Session session;
     Transaction transaction;
 
@@ -76,11 +76,6 @@ public class CreditDao implements GenericDao<Credit>, CreditCalculations {
     }
 
     @Override
-    public Class<Credit> getEntityClass() {
-        return null;
-    }
-
-    @Override
     public void deleteById(Long id) {
         try(Session session = setUp()) {
             transaction = session.beginTransaction();
@@ -97,17 +92,20 @@ public class CreditDao implements GenericDao<Credit>, CreditCalculations {
         }
     }
     @Override
-    public void save(Credit entity) {
+    public Credit save(Credit entity) {
         try(Session session = setUp()) {
             transaction = session.beginTransaction();
-            session.save(entity);
+            Long generatedId = (Long) session.save(entity);
             transaction.commit();
+            entity = session.get(Credit.class, generatedId);
+            return entity;
         } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();
             }
             e.printStackTrace();
         }
+        return null;
     }
 
     @Override

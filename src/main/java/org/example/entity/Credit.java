@@ -28,6 +28,7 @@ public class Credit {
     private Integer months;
 
     @ManyToOne
+    @JoinColumn(name = "sales_id")
     private Sales sales;
 
     @Column(name = "payment_date")

@@ -1,9 +1,8 @@
-import org.example.DAO.DAOImpl.CreditDao;
-import org.example.DAO.DAOImpl.DeliveryDao;
-import org.example.DAO.DAOImpl.ProductDao;
-import org.example.DAO.DAOImpl.SalesDao;
-import org.example.entity.Delivery;
+package DAOtests;
+
+import org.example.DAO.DAOImpl.UserDao;
 import org.example.entity.Product;
+import org.example.entity.User;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
@@ -28,7 +27,7 @@ import static org.mockito.Mockito.verify;
 import static utils.Utils.*;
 
 @RunWith(MockitoJUnitRunner.class)
-public class ProductTests {
+public class UserTests {
 
     @BeforeEach
     public void setUp() {
@@ -41,32 +40,32 @@ public class ProductTests {
 
     @InjectMocks
     @Spy
-    private ProductDao productDao;
+    private UserDao userDao;
 
     @Test
     public void testFindByIdEntityFound() {
-        doReturn(session).when(productDao).setUp();
+        doReturn(session).when(userDao).setUp();
         doReturn(transaction).when(session).beginTransaction();
-        doReturn(product1).when(session).get(eq(Product.class), eq(product1.getId()));
+        doReturn(user).when(session).get(eq(User.class), eq(product1.getId()));
 
-        Product result = productDao.findById(product1.getId(), Product.class);
+        User result = userDao.findById(user.getId(), User.class);
         assertNotNull(result);
-        Assertions.assertEquals(product1, result);
+        Assertions.assertEquals(user, result);
     }
 
     @Test
     public void testFindAllEntities() {
-        doReturn(session).when(productDao).setUp();
+        doReturn(session).when(userDao).setUp();
         doReturn(transaction).when(session).beginTransaction();
-        List<Product> products = Arrays.asList(product1, product2);
-        Query<Product> query = mock(Query.class);
-        doReturn(query).when(session).createQuery(anyString(), eq(Product.class));
-        doReturn(products).when(query).list();
+        List<User> users = Arrays.asList(user,user2);
+        Query<User> query = mock(Query.class);
+        doReturn(query).when(session).createQuery(anyString(), eq(User.class));
+        doReturn(users).when(query).list();
 
-        List<Product> result = productDao.getAllEntities(Product.class);
+        List<User> result = userDao.getAllEntities(User.class);
 
         assertNotNull(result);
-        Assertions.assertEquals(products, result);
+        Assertions.assertEquals(users, result);
 
         verify(transaction).commit();
         verify(session).close();
@@ -74,49 +73,49 @@ public class ProductTests {
 
     @Test
     public void testDeleteDeliveryEntity() {
-        doReturn(session).when(productDao).setUp();
+        doReturn(session).when(userDao).setUp();
         doReturn(transaction).when(session).beginTransaction();
 
-        productDao.delete(product1);
+        userDao.delete(user);
 
-        verify(session).delete(product1);
+        verify(session).delete(user);
         verify(transaction).commit();
         verify(session).close();
     }
 
     @Test
     public void testDeleteById() {
-        doReturn(session).when(productDao).setUp();
+        doReturn(session).when(userDao).setUp();
         doReturn(transaction).when(session).beginTransaction();
-        doReturn(product1).when(session).get(eq(Product.class), eq(product1.getId()));
+        doReturn(user).when(session).get(eq(User.class), eq(user.getId()));
 
-        productDao.deleteById(product1.getId());
+        userDao.deleteById(user.getId());
 
-        verify(session).delete(product1);
+        verify(session).delete(user);
         verify(transaction).commit();
         verify(session).close();
     }
 
     @Test
     public void testSaveDeliveryEntity() {
-        doReturn(session).when(productDao).setUp();
+        doReturn(session).when(userDao).setUp();
         doReturn(transaction).when(session).beginTransaction();
 
-        productDao.save(product1);
+        userDao.save(user);
 
-        verify(session).save(product1);
+        verify(session).save(user);
         verify(transaction).commit();
         verify(session).close();
     }
 
     @Test
     public void updateDeliveryEntity(){
-        doReturn(session).when(productDao).setUp();
+        doReturn(session).when(userDao).setUp();
         doReturn(transaction).when(session).beginTransaction();
 
-        productDao.updateEntity(product1);
+        userDao.updateEntity(user);
 
-        verify(session).update(product1);
+        verify(session).update(user);
         verify(transaction).commit();
         verify(session).close();
     }

@@ -1,6 +1,7 @@
 package org.example.DAO.DAOImpl;
 
 import org.example.DAO.GenericDao;
+import org.example.entity.Product;
 import org.example.entity.User;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -67,11 +68,6 @@ public class UserDao implements GenericDao<User> {
     }
 
     @Override
-    public Class<User> getEntityClass() {
-        return null;
-    }
-
-    @Override
     public void deleteById(Long id) {
         try (Session session = setUp()) {
             transaction = session.beginTransaction();
@@ -89,17 +85,20 @@ public class UserDao implements GenericDao<User> {
     }
 
     @Override
-    public void save(User entity) {
+    public User save(User entity) {
         try (Session session = setUp()) {
             transaction = session.beginTransaction();
-            session.save(entity);
+            Long generatedId = (Long) session.save(entity);
             transaction.commit();
+            entity = session.get(User.class, generatedId);
+            return entity;
         } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();
             }
             e.printStackTrace();
         }
+        return null;
     }
 
     @Override

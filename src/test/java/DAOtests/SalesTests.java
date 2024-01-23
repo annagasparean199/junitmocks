@@ -1,3 +1,5 @@
+package DAOtests;
+
 import org.example.DAO.DAOImpl.ProductDao;
 import org.example.DAO.DAOImpl.SalesDao;
 import org.example.DAO.DAOImpl.UserDao;

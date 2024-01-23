@@ -59,25 +59,25 @@
   <component name="ProjectViewState">
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/CRME121/Desktop&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.sourceCode.Java&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "last_opened_file_path": "C:/Users/CRME121/Desktop",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "preferences.pluginManager"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;GitStage.ChangesTree.GroupingKeys&quot;: [
-      &quot;directory&quot;,
-      &quot;module&quot;,
-      &quot;repository&quot;
+  "keyToStringList": {
+    "GitStage.ChangesTree.GroupingKeys": [
+      "directory",
+      "module",
+      "repository"
     ]
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\CRME121\IdeaProjects\junitmocks\src\main\java\org\example\DAO\DAOImpl" />
@@ -86,11 +86,17 @@
       <recent name="" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.CreditTests">
-    <configuration name="CreditTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="JUnit.CreditTestDb">
+    <configuration name="CreditTestDb" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="junitmocks" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="CreditTests" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="dbtests.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="dbtests" />
+      <option name="MAIN_CLASS_NAME" value="dbtests.CreditTestDb" />
       <option name="METHOD_NAME" value="" />
       <option name="TEST_OBJECT" value="class" />
       <option name="VM_PARAMETERS" value="-Xshare:off" />
@@ -98,12 +104,18 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CreditTests.getTotalPriceForOneCredit" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="CreditTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="junitmocks" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="CreditTests" />
-      <option name="METHOD_NAME" value="getTotalPriceForOneCredit" />
-      <option name="TEST_OBJECT" value="method" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="DAOtests.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="DAOtests" />
+      <option name="MAIN_CLASS_NAME" value="DAOtests.CreditTests" />
+      <option name="METHOD_NAME" value="" />
+      <option name="TEST_OBJECT" value="class" />
       <option name="VM_PARAMETERS" value="-Xshare:off" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -111,8 +123,14 @@
     </configuration>
     <configuration name="ProductTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="junitmocks" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="ProductTests" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="DAOtests.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="DAOtests" />
+      <option name="MAIN_CLASS_NAME" value="DAOtests.ProductTests" />
       <option name="METHOD_NAME" value="" />
       <option name="TEST_OBJECT" value="class" />
       <option name="VM_PARAMETERS" value="-Xshare:off" />
@@ -120,21 +138,33 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ProductTests.testDeleteById" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="SalesTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="junitmocks" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="ProductTests" />
-      <option name="METHOD_NAME" value="testDeleteById" />
-      <option name="TEST_OBJECT" value="method" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="DAOtests.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="DAOtests" />
+      <option name="MAIN_CLASS_NAME" value="DAOtests.SalesTests" />
+      <option name="METHOD_NAME" value="" />
+      <option name="TEST_OBJECT" value="class" />
       <option name="VM_PARAMETERS" value="-Xshare:off" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="SalesTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="UserTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="junitmocks" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="SalesTests" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="DAOtests.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="DAOtests" />
+      <option name="MAIN_CLASS_NAME" value="DAOtests.UserTests" />
       <option name="METHOD_NAME" value="" />
       <option name="TEST_OBJECT" value="class" />
       <option name="VM_PARAMETERS" value="-Xshare:off" />
@@ -155,11 +185,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.CreditTests" />
-        <item itemvalue="JUnit.CreditTests.getTotalPriceForOneCredit" />
+        <item itemvalue="JUnit.CreditTestDb" />
+        <item itemvalue="JUnit.UserTests" />
         <item itemvalue="JUnit.SalesTests" />
         <item itemvalue="JUnit.ProductTests" />
-        <item itemvalue="JUnit.ProductTests.testDeleteById" />
+        <item itemvalue="JUnit.CreditTests" />
       </list>
     </recent_temporary>
   </component>
@@ -228,7 +258,14 @@
       <option name="project" value="LOCAL" />
       <updated>1705953965185</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="9">
+      <created>1706002120085</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1706002120085</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -265,38 +302,24 @@
           <option name="timeStamp" value="100" />
         </breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/test/java/tets.java</url>
+          <url>file://$PROJECT_DIR$/src/test/java/Main.java</url>
           <line>54</line>
           <option name="timeStamp" value="18" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/org/example/DAO/DAOImpl/CreditDao.java</url>
-          <line>128</line>
+          <line>126</line>
           <option name="timeStamp" value="111" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/org/example/DAO/DAOImpl/CreditDao.java</url>
-          <line>190</line>
+          <line>188</line>
           <option name="timeStamp" value="113" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/test/java/SalesTests.java</url>
-          <line>134</line>
-          <option name="timeStamp" value="118" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/test/java/SalesTests.java</url>
-          <line>135</line>
-          <option name="timeStamp" value="119" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/src/main/java/org/example/DAO/GenericDao.java</url>
-          <line>13</line>
-          <properties class="org.example.DAO.GenericDao" method="setUp">
-            <option name="EMULATED" value="true" />
-            <option name="WATCH_EXIT" value="false" />
-          </properties>
-          <option name="timeStamp" value="73" />
+          <url>file://$PROJECT_DIR$/src/test/java/Main.java</url>
+          <line>19</line>
+          <option name="timeStamp" value="130" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/org/example/DAO/DAOImpl/HibernateUtility.java</url>
@@ -309,7 +332,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/org/example/DAO/DAOImpl/CreditDao.java</url>
-          <line>139</line>
+          <line>137</line>
           <properties class="org.example.DAO.DAOImpl.CreditDao" method="getTotalPriceForOneCredit">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
@@ -318,7 +341,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/org/example/DAO/DAOImpl/CreditDao.java</url>
-          <line>156</line>
+          <line>154</line>
           <properties class="org.example.DAO.DAOImpl.CreditDao" method="getTotalPriceForPersonCreditsPerMonth">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
@@ -327,7 +350,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/org/example/DAO/DAOImpl/CreditDao.java</url>
-          <line>178</line>
+          <line>176</line>
           <properties class="org.example.DAO.DAOImpl.CreditDao" method="getTotalAmountForPayedCredits">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
@@ -336,7 +359,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/org/example/DAO/DAOImpl/SalesDao.java</url>
-          <line>161</line>
+          <line>159</line>
           <properties class="org.example.DAO.DAOImpl.SalesDao" method="getDiscountPercentageFromPaidAmount">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
@@ -353,13 +376,13 @@
           <option name="timeStamp" value="122" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/src/test/java/SalesTests.java</url>
-          <line>131</line>
-          <properties class="SalesTests" method="testDiscountPercentageFromPaidAmount">
+          <url>file://$PROJECT_DIR$/src/main/java/org/example/Main.java</url>
+          <line>8</line>
+          <properties class="org.example.Main" method="main">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
           </properties>
-          <option name="timeStamp" value="123" />
+          <option name="timeStamp" value="134" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

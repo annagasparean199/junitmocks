@@ -67,11 +67,6 @@ public class ProductDao implements GenericDao<Product> {
     }
 
     @Override
-    public Class<Product> getEntityClass() {
-        return null;
-    }
-
-    @Override
     public void deleteById(Long id) {
         try(Session session = setUp()) {
             transaction = session.beginTransaction();
@@ -88,17 +83,20 @@ public class ProductDao implements GenericDao<Product> {
         }
     }
     @Override
-    public void save(Product entity) {
+    public Product save(Product entity) {
         try(Session session = setUp()) {
             transaction = session.beginTransaction();
-            session.save(entity);
+            Long generatedId = (Long) session.save(entity);
             transaction.commit();
+            entity = session.get(Product.class, generatedId);
+            return entity;
         } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();
             }
             e.printStackTrace();
         }
+        return null;
     }
 
     @Override

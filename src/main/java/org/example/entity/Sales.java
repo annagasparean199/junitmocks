@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 @Data
 @Builder
@@ -38,4 +39,7 @@ public class Sales {
     private BigDecimal paidAmount;
     @Column(name = "in_credit")
     private Boolean inCredit;
+
+//    @OneToMany(mappedBy = "sales", fetch = FetchType.LAZY)
+//    private List<Credit> credits;
 }

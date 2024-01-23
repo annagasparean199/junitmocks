@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @Builder
@@ -34,4 +35,10 @@ public class Product {
 
     @Column(name = "in_stock")
     private Boolean inStock;
+
+//    @OneToMany(mappedBy = "product_id", fetch = FetchType.LAZY)
+//    private List<Delivery> deliveries;
+//
+//    @OneToMany(mappedBy = "product_id", fetch = FetchType.LAZY)
+//    private List<Sales> sales;
 }

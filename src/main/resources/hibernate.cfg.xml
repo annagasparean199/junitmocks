@@ -16,7 +16,7 @@
         <property name="hibernate.current_session_context_class">thread</property>
         <property name="hibernate.globally_quoted_identifiers">true</property>
 
-        <property name="hbm2ddl.auto">create</property>
+        <property name="hbm2ddl.auto">create-drop</property>
 
 
 <!--        <property name="hibernate.show_sql">true</property>-->

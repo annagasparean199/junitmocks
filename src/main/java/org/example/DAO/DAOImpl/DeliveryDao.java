@@ -77,11 +77,6 @@ public class DeliveryDao implements GenericDao<Delivery>, DeliveryCalculations {
     }
 
     @Override
-    public Class<Delivery> getEntityClass() {
-        return null;
-    }
-
-    @Override
     public void deleteById(Long id) {
         try(Session session = setUp()) {
             transaction = session.beginTransaction();
@@ -98,17 +93,20 @@ public class DeliveryDao implements GenericDao<Delivery>, DeliveryCalculations {
         }
     }
     @Override
-    public void save(Delivery entity) {
+    public Delivery save(Delivery entity) {
         try(Session session = setUp()) {
             transaction = session.beginTransaction();
-            session.save(entity);
+            Long generatedId = (Long) session.save(entity);
             transaction.commit();
+            entity = session.get(Delivery.class, generatedId);
+            return entity;
         } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();
             }
             e.printStackTrace();
         }
+        return null;
     }
 
     @Override

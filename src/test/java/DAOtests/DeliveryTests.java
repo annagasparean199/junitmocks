@@ -1,3 +1,5 @@
+package DAOtests;
+
 import org.example.DAO.DAOImpl.CreditDao;
 import org.example.DAO.DAOImpl.DeliveryDao;
 import org.example.DAO.DAOImpl.SalesDao;
@@ -7,16 +9,23 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import org.hibernate.query.Query;
+
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 
+
 import org.junit.runner.RunWith;
-import org.mockito.*;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import org.mockito.Spy;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -37,9 +46,9 @@ public class DeliveryTests {
     @Mock
     private CreditDao creditDaoMock;
     @Mock
-    Session session = mock(Session.class);
+    private Session session;
     @Mock
-    Transaction transaction = mock(Transaction.class);
+    private Transaction transaction;
 
     @InjectMocks
     @Spy
@@ -48,29 +57,53 @@ public class DeliveryTests {
 
     @Test
     public void testCalculateStoreLossForMonth() {
+        delivery1.setDeliveryDate(new Date());
+        delivery2.setDeliveryDate(new Date());
+        delivery1.setQuantity(1);
+        delivery2.setQuantity(2);
+        product1.setPrice(100.0);
+        product2.setPrice(50.0);
         when(deliveryDao.getAllEntities(Delivery.class)).thenReturn(Arrays.asList(delivery1, delivery2));
         double result = deliveryDao.getStoreLossAmountForMonth(1);
 
-        Assertions.assertEquals(190.0, result);
+        Assertions.assertEquals(200.0, result);
     }
 
 
     @Test
     public void testCalculateStoreProfitForMonth() {
+        credit.setPaymentDate(new Date());
+        credit.setPricePerMonth(BigDecimal.valueOf(300));
+        sales1.setPurchaseDate(new Date());
+        sales2.setPurchaseDate(new Date());
+        sales1.setPaidAmount(BigDecimal.valueOf(500));
+        sales2.setPaidAmount(BigDecimal.valueOf(200));
         when(salesDaoMock.getAllEntities(Sales.class)).thenReturn(Arrays.asList(sales1, sales2));
         when(creditDaoMock.getAllEntities(Credit.class)).thenReturn(Collections.singletonList(credit));
 
-        Assertions.assertEquals(220, deliveryDao.getStoreProfitAmountForMonth(1));
+        Assertions.assertEquals(1000, deliveryDao.getStoreProfitAmountForMonth(1));
     }
 
     @Test
     public void assertSalesBalance() {
+        delivery1.setDeliveryDate(new Date());
+        delivery2.setDeliveryDate(new Date());
+        delivery1.setQuantity(1);
+        delivery2.setQuantity(2);
+        product1.setPrice(100.0);
+        product2.setPrice(50.0);
+        credit.setPaymentDate(new Date());
+        credit.setPricePerMonth(BigDecimal.valueOf(300));
+        sales1.setPurchaseDate(new Date());
+        sales2.setPurchaseDate(new Date());
+        sales1.setPaidAmount(BigDecimal.valueOf(500));
+        sales2.setPaidAmount(BigDecimal.valueOf(200));
         when(deliveryDao.getAllEntities(Delivery.class)).thenReturn(Arrays.asList(delivery1, delivery2));
         when(salesDaoMock.getAllEntities(Sales.class)).thenReturn(Arrays.asList(sales1, sales2));
         when(creditDaoMock.getAllEntities(Credit.class)).thenReturn(Collections.singletonList(credit));
 
         double result = deliveryDao.getStoreSalesBalancePerMonth(1);
-        Assertions.assertEquals(30, result);
+        Assertions.assertEquals(800, result);
     }
 
     @Test
@@ -140,7 +173,7 @@ public class DeliveryTests {
     }
 
     @Test
-    public void updateDeliveryEntity(){
+    public void updateDeliveryEntity() {
         doReturn(session).when(deliveryDao).setUp();
         doReturn(transaction).when(session).beginTransaction();
 
