@@ -8,8 +8,8 @@
         <property name="hibernate.connection.url">
             jdbc:mysql://localhost:3306/store
         </property>
-        <property name="hibernate.connection.username">root</property>
-        <property name="hibernate.connection.password">Anna123!</property>
+        <property name="hibernate.connection.username">Anna</property>
+        <property name="hibernate.connection.password">Anna12345!</property>
 
         <property name="hibernate.dialect">org.hibernate.dialect.MySQL8Dialect</property>
 

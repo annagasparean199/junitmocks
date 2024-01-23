@@ -3,7 +3,7 @@ package org.example.DAO.DAOImpl;
 import org.example.DAO.GenericDao;
 import org.example.entity.User;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 
 import java.util.List;
 
@@ -11,48 +11,108 @@ import static org.example.DAO.DAOImpl.HibernateUtility.getSessionFactory;
 
 public class UserDao implements GenericDao<User> {
 
-    private static UserDao instance;
-    SessionFactory sessionFactory = getSessionFactory();
+    Session session;
+    Transaction transaction;
 
-    public static synchronized UserDao getUserDaoInstance() {
-        if (instance == null) {
-            instance = new UserDao();
-        }
-        return instance;
+    public Session setUp() {
+        session = getSessionFactory().openSession();
+        return session;
     }
 
     @Override
     public User findById(Long id, Class<User> entityClass) {
-        return GenericDao.super.findById(id, entityClass);
+        User entity = null;
+        try (Session session = setUp()) {
+            transaction = session.beginTransaction();
+            entity = session.get(entityClass, id);
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+        }
+        return entity;
     }
 
     @Override
     public List<User> getAllEntities(Class<User> entityClass) {
-        return GenericDao.super.getAllEntities(entityClass);
+        List<User> entities = null;
+        try (Session session = setUp()) {
+            transaction = session.beginTransaction();
+            entities = session.createQuery("FROM " + entityClass.getName(), entityClass)
+                    .list();
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+        }
+        return entities;
     }
 
     @Override
     public void delete(User entity) {
-        GenericDao.super.delete(entity);
+        try (Session session = setUp()) {
+            transaction = session.beginTransaction();
+            session.delete(entity);
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+        }
     }
 
     @Override
     public Class<User> getEntityClass() {
-        return User.class;
+        return null;
     }
 
     @Override
     public void deleteById(Long id) {
-        GenericDao.super.deleteById(id);
+        try (Session session = setUp()) {
+            transaction = session.beginTransaction();
+            User entity = session.get(User.class, id);
+            if (entity != null) {
+                session.delete(entity);
+            }
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void save(User entity) {
-        GenericDao.super.save(entity);
+        try (Session session = setUp()) {
+            transaction = session.beginTransaction();
+            session.save(entity);
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void updateEntity(User entity) {
-        GenericDao.super.updateEntity(entity);
+        try (Session session = setUp()) {
+            transaction = session.beginTransaction();
+            session.update(entity);
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+        }
     }
 }

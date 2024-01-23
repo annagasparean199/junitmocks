@@ -1,5 +1,6 @@
 package org.example.DAO.DAOImpl;
 
+import lombok.extern.log4j.Log4j;
 import org.example.DAO.GenericDao;
 import org.example.entity.Credit;
 import org.example.entity.Delivery;
@@ -7,7 +8,6 @@ import org.example.entity.Product;
 import org.example.entity.Sales;
 import org.example.interfaces.DeliveryCalculations;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
 import java.time.LocalDate;
@@ -122,9 +122,9 @@ public class DeliveryDao implements GenericDao<Delivery>, DeliveryCalculations {
                 transaction.rollback();
             }
             e.printStackTrace();
+
         }
     }
-
 
     @Override
     public double getStoreLossAmountForMonth(int targetMonth) {

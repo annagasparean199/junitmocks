@@ -3,50 +3,137 @@ import lombok.extern.log4j.Log4j;
 import org.example.DAO.DAOImpl.CreditDao;
 import org.example.DAO.DAOImpl.ProductDao;
 import org.example.DAO.DAOImpl.SalesDao;
-import org.example.entity.*;
 
+
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
 
+import org.example.entity.Credit;
+import org.example.entity.Product;
+import org.example.entity.Sales;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+import org.hibernate.query.Query;
+import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+
+import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.Spy;
+import org.mockito.junit.MockitoJUnitRunner;
 
 import java.math.BigDecimal;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.Period;
-import java.util.*;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.List;
 
-import static org.hamcrest.Matchers.any;
-import static org.mockito.Mockito.when;
-import static utils.Utils.credit;
-import static utils.Utils.credit2;
-import static utils.Utils.getRecord;
-import static utils.Utils.product1;
-import static utils.Utils.sales1;
-import static utils.Utils.sales2;
-import static utils.Utils.user;
+
+import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.verify;
+import static utils.Utils.*;
 
 @Log4j
+@RunWith(MockitoJUnitRunner.class)
 public class CreditTests {
 
     @BeforeEach
     public void setUp() {
         MockitoAnnotations.openMocks(this);
     }
-
-    @Mock
-    ProductDao productDao;
     @Mock
     private SalesDao salesDaoMock;
+
+    @Mock
+    Session session = mock(Session.class);
+
+    @Mock
+    Transaction transaction = mock(Transaction.class);
 
     @Spy
     @InjectMocks
     CreditDao creditDao;
+
+    @Test
+    public void testFindByIdEntityFound() {
+        doReturn(session).when(creditDao).setUp();
+        doReturn(transaction).when(session).beginTransaction();
+        doReturn(credit).when(session).get(eq(Credit.class), eq(credit.getId()));
+
+        Credit result = creditDao.findById(credit.getId(), Credit.class);
+        assertNotNull(result);
+        Assertions.assertEquals(credit, result);
+    }
+
+    @Test
+    public void testFindAllEntities() {
+        doReturn(session).when(creditDao).setUp();
+        doReturn(transaction).when(session).beginTransaction();
+        List<Credit> credits = Arrays.asList(credit, credit2);
+        Query<Credit> query = mock(Query.class);
+        doReturn(query).when(session).createQuery(anyString(), eq(Credit.class));
+        doReturn(credits).when(query).list();
+
+        List<Credit> result = creditDao.getAllEntities(Credit.class);
+
+        assertNotNull(result);
+        Assertions.assertEquals(credits, result);
+
+        verify(transaction).commit();
+        verify(session).close();
+    }
+
+    @Test
+    public void testDeleteDeliveryEntity() {
+        doReturn(session).when(creditDao).setUp();
+        doReturn(transaction).when(session).beginTransaction();
+
+        creditDao.delete(credit);
+
+        verify(session).delete(credit);
+        verify(transaction).commit();
+        verify(session).close();
+    }
+
+    @Test
+    public void testDeleteById() {
+        doReturn(session).when(creditDao).setUp();
+        doReturn(transaction).when(session).beginTransaction();
+        doReturn(credit).when(session).get(eq(Credit.class), eq(credit.getId()));
+
+        creditDao.deleteById(credit.getId());
+
+        verify(session).delete(credit);
+        verify(transaction).commit();
+        verify(session).close();
+    }
+
+    @Test
+    public void testSaveDeliveryEntity() {
+        doReturn(session).when(creditDao).setUp();
+        doReturn(transaction).when(session).beginTransaction();
+
+        creditDao.save(credit);
+
+        verify(session).save(credit);
+        verify(transaction).commit();
+        verify(session).close();
+    }
+
+    @Test
+    public void updateDeliveryEntity(){
+        doReturn(session).when(creditDao).setUp();
+        doReturn(transaction).when(session).beginTransaction();
+
+        creditDao.updateEntity(credit);
+
+        verify(session).update(credit);
+        verify(transaction).commit();
+        verify(session).close();
+    }
 
     @Test
     public void getTotalPriceForOneCredit() {
@@ -54,7 +141,6 @@ public class CreditTests {
         credit.setPricePerMonth(BigDecimal.valueOf(20.0));
         when(salesDaoMock.getAllEntities(Sales.class)).thenReturn(Arrays.asList(sales1, sales2));
         when(creditDao.findCreditBySalesId(eq(sales1.getId()))).thenReturn(credit);
-        when(creditDao.findCreditBySalesId(eq(sales2.getId()))).thenReturn(credit);
         Double result = creditDao.getTotalPriceForOneCredit(product1.getId(), user.getId());
         log.info("Testing amount for one credit: \n" + user + "\n" + product1);
         log.info("Actual " + result + " Expected " + credit.getPricePerMonth().doubleValue()
@@ -82,6 +168,8 @@ public class CreditTests {
         credit2.setMonths(2);
         credit.setPricePerMonth(BigDecimal.valueOf(40.0));
         credit2.setPricePerMonth(BigDecimal.valueOf(50.0));
+        credit.setPaymentDate(new Date());
+        credit2.setPaymentDate(new Date());
         when(salesDaoMock.getAllEntities(Sales.class)).thenReturn(Arrays.asList(sales1, sales2));
         when(creditDao.findCreditBySalesId(eq(sales1.getId()))).thenReturn(credit);
         when(creditDao.findCreditBySalesId(eq(sales2.getId()))).thenReturn(credit2);

@@ -1,55 +1,133 @@
 package org.example.DAO.DAOImpl;
 
 import org.example.DAO.GenericDao;
+import org.example.entity.Delivery;
 import org.example.entity.Product;
 import org.example.entity.Sales;
 import org.example.entity.User;
 import org.example.interfaces.SalesCalculations;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 
+import java.time.LocalDate;
 import java.time.Year;
+import java.time.ZoneId;
 import java.util.List;
+
+import static org.example.DAO.DAOImpl.HibernateUtility.getSessionFactory;
 
 
 public class SalesDao implements GenericDao<Sales>, SalesCalculations {
 
+    Session session;
+    Transaction transaction;
+    ProductDao productDao = new ProductDao();
+    UserDao userDao = new UserDao();
+
+    public Session setUp(){
+        session = getSessionFactory().openSession();
+        return session;
+    }
+
     @Override
     public Sales findById(Long id, Class<Sales> entityClass) {
-        return GenericDao.super.findById(id, entityClass);
+        Sales entity = null;
+        try(Session session = setUp()) {
+            transaction = session.beginTransaction();
+            entity = session.get(entityClass, id);
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+        }
+        return entity;
     }
 
     @Override
     public List<Sales> getAllEntities(Class<Sales> entityClass) {
-        return GenericDao.super.getAllEntities(entityClass);
+        List<Sales> entities = null;
+        try (Session session = setUp()) {
+            transaction = session.beginTransaction();
+            entities = session.createQuery("FROM " + entityClass.getName(), entityClass)
+                    .list();
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+        }
+        return entities;
     }
 
     @Override
     public void delete(Sales entity) {
-        GenericDao.super.delete(entity);
+        try (Session session = setUp()){
+            transaction = session.beginTransaction();
+            session.delete(entity);
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+        }
     }
 
     @Override
     public Class<Sales> getEntityClass() {
-        return Sales.class;
+        return null;
     }
 
     @Override
     public void deleteById(Long id) {
-        GenericDao.super.deleteById(id);
+        try(Session session = setUp()) {
+            transaction = session.beginTransaction();
+            Sales entity = session.get(Sales.class, id);
+            if (entity != null) {
+                session.delete(entity);
+            }
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+        }
     }
-
     @Override
     public void save(Sales entity) {
-        GenericDao.super.save(entity);
+        try(Session session = setUp()) {
+            transaction = session.beginTransaction();
+            session.save(entity);
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void updateEntity(Sales entity) {
-        GenericDao.super.updateEntity(entity);
+        try(Session session = setUp()) {
+            transaction = session.beginTransaction();
+            session.update(entity);
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+        }
     }
 
     @Override
     public double getCalculatedPercentageForUser(Long userId) {
-        User user = UserDao.getUserDaoInstance().findById(userId, User.class);
+        User user = userDao.findById(userId, User.class);
         double percentage = 0;
 
         if ("Maximum".equals(user.getCompany())) {
@@ -76,16 +154,15 @@ public class SalesDao implements GenericDao<Sales>, SalesCalculations {
 
     @Override
     public double getPriceWithDiscount(double discount, Long productId) {
-        ProductDao productDao = new ProductDao();
         Product product = productDao.findById(productId,Product.class);
         return product.getPrice() - (product.getPrice()/100*discount);
     }
 
     @Override
-    public double getFullPriceFromPaidAmount(Long salesId){
+    public double getDiscountPercentageFromPaidAmount(Long salesId){
         Sales sales = findById(salesId, Sales.class);
         Product product = sales.getProduct();
-        return product.getPrice() - (sales.getPaidAmount().doubleValue()/ product.getPrice() * 100);
+        return 100*((product.getPrice()-sales.getPaidAmount().doubleValue())/((product.getPrice())));
     }
 
     @Override
@@ -93,12 +170,20 @@ public class SalesDao implements GenericDao<Sales>, SalesCalculations {
         List<Sales> sales = getAllEntities(Sales.class);
 
         long salesForTheYear = sales.stream()
-                .filter(sale -> Year.of(sale.getPurchaseDate().getYear()).equals(year))
+                .filter(sale -> {
+                    LocalDate purchaseDate = sale.getPurchaseDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+                    return Year.from(purchaseDate).equals(year);
+                })
                 .count();
 
-        return (salesForTheYear / (double) sales.size()) * 100;
+        if (salesForTheYear != 0) {
+            return (salesForTheYear / (double) sales.size()) * 100;
+        } else {
+            return 0;
+        }
     }
 }
+
 
 //    public double getPercentageOfSalesPerYear(Year year){
 //        List<Sales> sales = getAllEntities(Sales.class);

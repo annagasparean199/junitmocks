@@ -2,52 +2,127 @@ package org.example.DAO.DAOImpl;
 
 import org.example.DAO.GenericDao;
 import org.example.entity.Credit;
+import org.example.entity.Delivery;
 import org.example.entity.Sales;
 import org.example.interfaces.CreditCalculations;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+
 import java.text.SimpleDateFormat;
 import java.time.Period;
 
 import java.time.LocalDate;
 import java.util.List;
 
+import static org.example.DAO.DAOImpl.HibernateUtility.getSessionFactory;
+
 public class CreditDao implements GenericDao<Credit>, CreditCalculations {
 
     SalesDao salesDao = new SalesDao();
 
+    Session session;
+    Transaction transaction;
+
+    public Session setUp(){
+        session = getSessionFactory().openSession();
+        return session;
+    }
+
     @Override
     public Credit findById(Long id, Class<Credit> entityClass) {
-        return GenericDao.super.findById(id, entityClass);
+        Credit entity = null;
+        try(Session session = setUp()) {
+            transaction = session.beginTransaction();
+            entity = session.get(entityClass, id);
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+        }
+        return entity;
     }
 
     @Override
     public List<Credit> getAllEntities(Class<Credit> entityClass) {
-        return GenericDao.super.getAllEntities(entityClass);
+        List<Credit> entities = null;
+        try (Session session = setUp()) {
+            transaction = session.beginTransaction();
+            entities = session.createQuery("FROM " + entityClass.getName(), entityClass)
+                    .list();
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+        }
+        return entities;
     }
 
     @Override
     public void delete(Credit entity) {
-        GenericDao.super.delete(entity);
+        try (Session session = setUp()){
+            transaction = session.beginTransaction();
+            session.delete(entity);
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+        }
     }
 
     @Override
     public Class<Credit> getEntityClass() {
-        return Credit.class;
+        return null;
     }
 
     @Override
     public void deleteById(Long id) {
-        GenericDao.super.deleteById(id);
+        try(Session session = setUp()) {
+            transaction = session.beginTransaction();
+            Credit entity = session.get(Credit.class, id);
+            if (entity != null) {
+                session.delete(entity);
+            }
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+        }
     }
-
     @Override
     public void save(Credit entity) {
-        GenericDao.super.save(entity);
+        try(Session session = setUp()) {
+            transaction = session.beginTransaction();
+            session.save(entity);
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+        }
     }
-
 
     @Override
     public void updateEntity(Credit entity) {
-        GenericDao.super.updateEntity(entity);
+        try(Session session = setUp()) {
+            transaction = session.beginTransaction();
+            session.update(entity);
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+
+        }
     }
 
     public Credit findCreditBySalesId(Long salesId) {

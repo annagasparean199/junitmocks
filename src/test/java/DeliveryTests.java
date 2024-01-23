@@ -109,7 +109,6 @@ public class DeliveryTests {
 
         deliveryDao.delete(delivery1);
 
-        //checked interactions
         verify(session).delete(delivery1);
         verify(transaction).commit();
         verify(session).close();
