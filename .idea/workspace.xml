@@ -86,7 +86,14 @@
       <recent name="" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.CreditTestDb">
+  <component name="RunManager" selected="JUnit.CreditTestDb.testFindByIdEntityFound">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Main" />
+      <module name="junitmocks" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="CreditTestDb" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="junitmocks" />
       <extension name="coverage">
@@ -104,35 +111,18 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CreditTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="CreditTestDb.testFindByIdEntityFound" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="junitmocks" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="DAOtests.*" />
+          <option name="PATTERN" value="dbtests.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="DAOtests" />
-      <option name="MAIN_CLASS_NAME" value="DAOtests.CreditTests" />
-      <option name="METHOD_NAME" value="" />
-      <option name="TEST_OBJECT" value="class" />
-      <option name="VM_PARAMETERS" value="-Xshare:off" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ProductTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="junitmocks" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="DAOtests.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="DAOtests" />
-      <option name="MAIN_CLASS_NAME" value="DAOtests.ProductTests" />
-      <option name="METHOD_NAME" value="" />
-      <option name="TEST_OBJECT" value="class" />
+      <option name="PACKAGE_NAME" value="dbtests" />
+      <option name="MAIN_CLASS_NAME" value="dbtests.CreditTestDb" />
+      <option name="METHOD_NAME" value="testFindByIdEntityFound" />
+      <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" value="-Xshare:off" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -185,11 +175,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.CreditTestDb.testFindByIdEntityFound" />
+        <item itemvalue="Application.Main" />
         <item itemvalue="JUnit.CreditTestDb" />
         <item itemvalue="JUnit.UserTests" />
         <item itemvalue="JUnit.SalesTests" />
-        <item itemvalue="JUnit.ProductTests" />
-        <item itemvalue="JUnit.CreditTests" />
       </list>
     </recent_temporary>
   </component>
@@ -265,7 +255,14 @@
       <option name="project" value="LOCAL" />
       <updated>1706002120085</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="10">
+      <created>1706022407154</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1706022407154</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -288,7 +285,8 @@
     <MESSAGE value="7" />
     <MESSAGE value="8" />
     <MESSAGE value="9" />
-    <option name="LAST_COMMIT_MESSAGE" value="9" />
+    <MESSAGE value="10" />
+    <option name="LAST_COMMIT_MESSAGE" value="10" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -308,18 +306,18 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/org/example/DAO/DAOImpl/CreditDao.java</url>
-          <line>126</line>
-          <option name="timeStamp" value="111" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/org/example/DAO/DAOImpl/CreditDao.java</url>
           <line>188</line>
           <option name="timeStamp" value="113" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/test/java/Main.java</url>
-          <line>19</line>
+          <line>23</line>
           <option name="timeStamp" value="130" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/test/java/DAOtests/CreditTests.java</url>
+          <line>60</line>
+          <option name="timeStamp" value="143" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/org/example/DAO/DAOImpl/HibernateUtility.java</url>
@@ -383,6 +381,24 @@
             <option name="WATCH_EXIT" value="false" />
           </properties>
           <option name="timeStamp" value="134" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/test/java/dbtests/CreditTestDb.java</url>
+          <line>32</line>
+          <properties class="dbtests.CreditTestDb" method="testFindByIdEntityFound">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="142" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/main/java/org/example/DAO/DAOImpl/CreditDao.java</url>
+          <line>125</line>
+          <properties class="org.example.DAO.DAOImpl.CreditDao" method="findCreditBySalesId">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="144" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

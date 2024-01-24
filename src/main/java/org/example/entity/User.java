@@ -1,10 +1,6 @@
 package org.example.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
+import lombok.*;
 import javax.persistence.*;
 
 import java.util.List;
@@ -38,6 +34,8 @@ public class User {
     @Column(name = "name")
     private String name;
 
-//    @OneToMany(mappedBy = "user_id", fetch = FetchType.LAZY)
-//    private List<Sales> sales;
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    private List<Sales> sales;
 }

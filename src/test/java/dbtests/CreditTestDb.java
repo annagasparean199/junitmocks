@@ -29,8 +29,6 @@ public class CreditTestDb {
         createUtils();
     }
 
-    public static Sales sale = new Sales(2L, product2, user, new Date(), 3, new BigDecimal("90.00"), true);
-
     @Test
     public void testFindByIdEntityFound() {
         CreditDao creditDao = new CreditDao();

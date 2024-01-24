@@ -1,13 +1,13 @@
 package org.example.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+
 
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.Objects;
+
 
 @Data
 @Builder
@@ -27,7 +27,9 @@ public class Credit {
     @Column(name = "months")
     private Integer months;
 
-    @ManyToOne
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "sales_id")
     private Sales sales;
 

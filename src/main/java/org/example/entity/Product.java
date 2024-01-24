@@ -1,9 +1,6 @@
 package org.example.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
@@ -36,9 +33,13 @@ public class Product {
     @Column(name = "in_stock")
     private Boolean inStock;
 
-//    @OneToMany(mappedBy = "product_id", fetch = FetchType.LAZY)
-//    private List<Delivery> deliveries;
-//
-//    @OneToMany(mappedBy = "product_id", fetch = FetchType.LAZY)
-//    private List<Sales> sales;
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
+    private List<Delivery> deliveries;
+
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
+    private List<Sales> sales;
 }

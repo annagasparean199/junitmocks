@@ -1,14 +1,10 @@
 package org.example.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Data
 @Builder
@@ -23,23 +19,32 @@ public class Sales {
     @Column(name = "id")
     private Long id;
 
-    @ManyToOne
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_id")
     private Product product;
 
-    @ManyToOne
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
 
     @Column(name = "purchase_date")
     private Date purchaseDate;
+
     @Column(name = "quantity")
     private Integer quantity;
+
     @Column(name = "paid_amount")
     private BigDecimal paidAmount;
+
     @Column(name = "in_credit")
     private Boolean inCredit;
 
-//    @OneToMany(mappedBy = "sales", fetch = FetchType.LAZY)
-//    private List<Credit> credits;
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    @OneToMany(mappedBy = "sales", fetch = FetchType.LAZY)
+    private List<Credit> credits;
 }

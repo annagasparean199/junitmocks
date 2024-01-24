@@ -1,9 +1,6 @@
 package org.example.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -25,7 +22,9 @@ public class Delivery {
     @Column(name = "quantity")
     private Integer quantity;
 
-    @ManyToOne
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_id")
     private Product product;
 }
