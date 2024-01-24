@@ -27,10 +27,17 @@ import java.util.Date;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.*;
+
+import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
-import static utils.Utils.*;
+import static org.mockito.Mockito.verify;
+import static utils.Utils.product1;
+import static utils.Utils.sales1;
+import static utils.Utils.sales2;
+import static utils.Utils.user;
+
 
 @RunWith(MockitoJUnitRunner.class)
 public class SalesTests {

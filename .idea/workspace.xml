@@ -68,7 +68,7 @@
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "preferences.pluginManager"
+    "settings.editor.selected.configurable": "preferences.sourceCode.Java"
   },
   "keyToStringList": {
     "GitStage.ChangesTree.GroupingKeys": [
@@ -87,9 +87,15 @@
     </key>
   </component>
   <component name="RunManager" selected="JUnit.CreditTestDb.testFindByIdEntityFound">
-    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Main" />
+    <configuration name="org.example.Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="org.example.Main" />
       <module name="junitmocks" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.example.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -128,24 +134,24 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="SalesTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="CreditTestDb.updateDeliveryEntity" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="junitmocks" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="DAOtests.*" />
+          <option name="PATTERN" value="dbtests.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="DAOtests" />
-      <option name="MAIN_CLASS_NAME" value="DAOtests.SalesTests" />
-      <option name="METHOD_NAME" value="" />
-      <option name="TEST_OBJECT" value="class" />
+      <option name="PACKAGE_NAME" value="dbtests" />
+      <option name="MAIN_CLASS_NAME" value="dbtests.CreditTestDb" />
+      <option name="METHOD_NAME" value="updateDeliveryEntity" />
+      <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" value="-Xshare:off" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="UserTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="DeliveryTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="junitmocks" />
       <extension name="coverage">
         <pattern>
@@ -154,7 +160,7 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="DAOtests" />
-      <option name="MAIN_CLASS_NAME" value="DAOtests.UserTests" />
+      <option name="MAIN_CLASS_NAME" value="DAOtests.DeliveryTests" />
       <option name="METHOD_NAME" value="" />
       <option name="TEST_OBJECT" value="class" />
       <option name="VM_PARAMETERS" value="-Xshare:off" />
@@ -176,10 +182,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="JUnit.CreditTestDb.testFindByIdEntityFound" />
-        <item itemvalue="Application.Main" />
+        <item itemvalue="Application.org.example.Main" />
         <item itemvalue="JUnit.CreditTestDb" />
-        <item itemvalue="JUnit.UserTests" />
-        <item itemvalue="JUnit.SalesTests" />
+        <item itemvalue="JUnit.DeliveryTests" />
+        <item itemvalue="JUnit.CreditTestDb.updateDeliveryEntity" />
       </list>
     </recent_temporary>
   </component>
@@ -262,7 +268,14 @@
       <option name="project" value="LOCAL" />
       <updated>1706022407154</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="11">
+      <created>1706082724089</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1706082724089</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -286,7 +299,8 @@
     <MESSAGE value="8" />
     <MESSAGE value="9" />
     <MESSAGE value="10" />
-    <option name="LAST_COMMIT_MESSAGE" value="10" />
+    <MESSAGE value="11" />
+    <option name="LAST_COMMIT_MESSAGE" value="11" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -306,7 +320,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/org/example/DAO/DAOImpl/CreditDao.java</url>
-          <line>188</line>
+          <line>184</line>
           <option name="timeStamp" value="113" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
@@ -316,12 +330,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/test/java/DAOtests/CreditTests.java</url>
-          <line>60</line>
+          <line>67</line>
           <option name="timeStamp" value="143" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/org/example/DAO/DAOImpl/HibernateUtility.java</url>
-          <line>25</line>
+          <line>29</line>
           <properties class="org.example.DAO.DAOImpl.HibernateUtility" method="getSessionFactory">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
@@ -330,7 +344,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/org/example/DAO/DAOImpl/CreditDao.java</url>
-          <line>137</line>
+          <line>133</line>
           <properties class="org.example.DAO.DAOImpl.CreditDao" method="getTotalPriceForOneCredit">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
@@ -339,7 +353,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/org/example/DAO/DAOImpl/CreditDao.java</url>
-          <line>154</line>
+          <line>150</line>
           <properties class="org.example.DAO.DAOImpl.CreditDao" method="getTotalPriceForPersonCreditsPerMonth">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
@@ -348,7 +362,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/org/example/DAO/DAOImpl/CreditDao.java</url>
-          <line>176</line>
+          <line>172</line>
           <properties class="org.example.DAO.DAOImpl.CreditDao" method="getTotalAmountForPayedCredits">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
@@ -357,7 +371,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/org/example/DAO/DAOImpl/SalesDao.java</url>
-          <line>159</line>
+          <line>158</line>
           <properties class="org.example.DAO.DAOImpl.SalesDao" method="getDiscountPercentageFromPaidAmount">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
@@ -366,7 +380,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/org/example/DAO/DAOImpl/SalesDao.java</url>
-          <line>32</line>
+          <line>31</line>
           <properties class="org.example.DAO.DAOImpl.SalesDao" method="findById">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
@@ -375,7 +389,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/org/example/Main.java</url>
-          <line>8</line>
+          <line>7</line>
           <properties class="org.example.Main" method="main">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
@@ -383,17 +397,8 @@
           <option name="timeStamp" value="134" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/src/test/java/dbtests/CreditTestDb.java</url>
-          <line>32</line>
-          <properties class="dbtests.CreditTestDb" method="testFindByIdEntityFound">
-            <option name="EMULATED" value="true" />
-            <option name="WATCH_EXIT" value="false" />
-          </properties>
-          <option name="timeStamp" value="142" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/org/example/DAO/DAOImpl/CreditDao.java</url>
-          <line>125</line>
+          <line>121</line>
           <properties class="org.example.DAO.DAOImpl.CreditDao" method="findCreditBySalesId">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />

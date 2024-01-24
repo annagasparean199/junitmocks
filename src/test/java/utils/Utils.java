@@ -1,11 +1,22 @@
 package utils;
 
-import org.example.DAO.DAOImpl.*;
-import org.example.entity.*;
+
+import org.example.DAO.DAOImpl.CreditDao;
+import org.example.DAO.DAOImpl.DeliveryDao;
+import org.example.DAO.DAOImpl.ProductDao;
+import org.example.DAO.DAOImpl.SalesDao;
+import org.example.DAO.DAOImpl.UserDao;
+import org.example.entity.Credit;
+import org.example.entity.Delivery;
+import org.example.entity.Product;
+import org.example.entity.Sales;
+import org.example.entity.User;
 import org.junit.jupiter.api.BeforeAll;
 
 import java.math.BigDecimal;
-import java.util.*;
+import java.util.Date;
+import java.util.UUID;
+
 
 public class Utils {
 
@@ -30,7 +41,6 @@ public class Utils {
         creditDao.save(credit2);
     }
 
-
     public static Product product1 = new Product(1L, "Red", 10, "Widget A", 20.0, true, null, null);
     public static Product product2 = new Product(2L, "Blue", 5, "Widget B", 30.0, false, null, null);
     public static User user = new User(1L, 50000.0, UUID.randomUUID(), true, "ABC Corporation", "John Doe", null);
@@ -42,5 +52,4 @@ public class Utils {
     public static Credit credit2 = new Credit(2L, new BigDecimal("30.00"), 12, sales2, new Date());
     public static Delivery delivery1 = new Delivery(1L, new Date(), 5, product1);
     public static Delivery delivery2 = new Delivery(2L, new Date(), 3, product2);
-
 }

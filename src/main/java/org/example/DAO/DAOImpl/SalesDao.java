@@ -1,7 +1,6 @@
 package org.example.DAO.DAOImpl;
 
 import org.example.DAO.GenericDao;
-import org.example.entity.Delivery;
 import org.example.entity.Product;
 import org.example.entity.Sales;
 import org.example.entity.User;

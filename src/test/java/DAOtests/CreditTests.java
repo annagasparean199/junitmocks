@@ -30,10 +30,17 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
-
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
-import static utils.Utils.*;
+import static org.mockito.Mockito.when;
+
+import static utils.Utils.credit;
+import static utils.Utils.credit2;
+import static utils.Utils.product1;
+import static utils.Utils.sales1;
+import static utils.Utils.sales2;
+import static utils.Utils.user;
 
 @Log4j
 @RunWith(MockitoJUnitRunner.class)
@@ -47,10 +54,10 @@ public class CreditTests {
     private SalesDao salesDaoMock;
 
     @Mock
-    Session session = mock(Session.class);
+    Session session;
 
     @Mock
-    Transaction transaction = mock(Transaction.class);
+    Transaction transaction;
 
     @Spy
     @InjectMocks

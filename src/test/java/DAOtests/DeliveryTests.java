@@ -3,8 +3,11 @@ package DAOtests;
 import org.example.DAO.DAOImpl.CreditDao;
 import org.example.DAO.DAOImpl.DeliveryDao;
 import org.example.DAO.DAOImpl.SalesDao;
-import org.example.entity.*;
 
+
+import org.example.entity.Credit;
+import org.example.entity.Delivery;
+import org.example.entity.Sales;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -29,9 +32,20 @@ import java.util.Date;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.*;
-import static utils.Utils.*;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+import static utils.Utils.credit;
+import static utils.Utils.delivery1;
+import static utils.Utils.delivery2;
+import static utils.Utils.product1;
+import static utils.Utils.product2;
+import static utils.Utils.sales1;
+import static utils.Utils.sales2;
+
 
 @RunWith(MockitoJUnitRunner.class)
 public class DeliveryTests {

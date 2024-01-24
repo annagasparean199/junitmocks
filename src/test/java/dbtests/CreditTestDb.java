@@ -1,11 +1,10 @@
 package dbtests;
 
-
 import lombok.extern.log4j.Log4j;
-import org.example.DAO.DAOImpl.*;
-import org.example.entity.Credit;
-import org.example.entity.Sales;
 
+import org.example.DAO.DAOImpl.CreditDao;
+import org.example.DAO.DAOImpl.SalesDao;
+import org.example.entity.Credit;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
@@ -18,7 +17,10 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static utils.Utils.*;
+import static utils.Utils.createUtils;
+import static utils.Utils.credit;
+import static utils.Utils.credit2;
+import static utils.Utils.sale;
 
 @Log4j
 public class CreditTestDb {

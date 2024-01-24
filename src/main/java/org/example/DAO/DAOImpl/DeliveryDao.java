@@ -1,6 +1,5 @@
 package org.example.DAO.DAOImpl;
 
-import lombok.extern.log4j.Log4j;
 import org.example.DAO.GenericDao;
 import org.example.entity.Credit;
 import org.example.entity.Delivery;

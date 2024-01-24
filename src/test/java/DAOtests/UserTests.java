@@ -1,7 +1,6 @@
 package DAOtests;
 
 import org.example.DAO.DAOImpl.UserDao;
-import org.example.entity.Product;
 import org.example.entity.User;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -22,9 +21,13 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.*;
+
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
-import static utils.Utils.*;
+import static utils.Utils.product1;
+import static utils.Utils.user;
+import static utils.Utils.user2;
 
 @RunWith(MockitoJUnitRunner.class)
 public class UserTests {

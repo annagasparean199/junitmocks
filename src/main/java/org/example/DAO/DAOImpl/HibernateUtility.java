@@ -1,6 +1,10 @@
 package org.example.DAO.DAOImpl;
 
-import org.example.entity.*;
+import org.example.entity.Credit;
+import org.example.entity.Delivery;
+import org.example.entity.Product;
+import org.example.entity.Sales;
+import org.example.entity.User;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
