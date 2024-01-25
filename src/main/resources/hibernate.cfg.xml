@@ -18,14 +18,13 @@
 
         <property name="hbm2ddl.auto">create-drop</property>
 
-
 <!--        <property name="hibernate.show_sql">true</property>-->
         <property name="hibernate.format_sql">true</property>
 
-        <mapping class="org.example.entity.User"/>
-        <mapping class="org.example.entity.Delivery"/>
-        <mapping class="org.example.entity.Credit"/>
-        <mapping class="org.example.entity.Product"/>
-        <mapping class="org.example.entity.Sales"/>
+        <mapping class="org.example.entities.User"/>
+        <mapping class="org.example.entities.Delivery"/>
+        <mapping class="org.example.entities.Credit"/>
+        <mapping class="org.example.entities.Product"/>
+        <mapping class="org.example.entities.Sales"/>
     </session-factory>
 </hibernate-configuration>

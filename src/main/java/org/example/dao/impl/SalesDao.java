@@ -1,20 +1,18 @@
-package org.example.DAO.DAOImpl;
+package org.example.dao.impl;
 
-import org.example.DAO.GenericDao;
-import org.example.entity.Product;
-import org.example.entity.Sales;
-import org.example.entity.User;
-import org.example.interfaces.SalesCalculations;
+import org.example.dao.GenericDao;
+import org.example.entities.Product;
+import org.example.entities.Sales;
+import org.example.entities.User;
+import org.example.financemanager.SalesCalculations;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-
 import java.time.LocalDate;
 import java.time.Year;
 import java.time.ZoneId;
 import java.util.List;
 
-import static org.example.DAO.DAOImpl.HibernateUtility.getSessionFactory;
-
+import static org.example.dao.impl.HibernateUtility.getSessionFactory;
 
 public class SalesDao implements GenericDao<Sales>, SalesCalculations {
 
@@ -23,17 +21,17 @@ public class SalesDao implements GenericDao<Sales>, SalesCalculations {
     ProductDao productDao = new ProductDao();
     UserDao userDao = new UserDao();
 
-    public Session setUp(){
+    public Session setUp() {
         session = getSessionFactory().openSession();
         return session;
     }
 
     @Override
-    public Sales findById(Long id, Class<Sales> entityClass) {
+    public Sales findById(Long id) {
         Sales entity = null;
-        try(Session session = setUp()) {
+        try (Session session = setUp()) {
             transaction = session.beginTransaction();
-            entity = session.get(entityClass, id);
+            entity = session.get(Sales.class, id);
             transaction.commit();
         } catch (Exception e) {
             if (transaction != null) {
@@ -45,12 +43,11 @@ public class SalesDao implements GenericDao<Sales>, SalesCalculations {
     }
 
     @Override
-    public List<Sales> getAllEntities(Class<Sales> entityClass) {
+    public List<Sales> getAllEntities() {
         List<Sales> entities = null;
         try (Session session = setUp()) {
             transaction = session.beginTransaction();
-            entities = session.createQuery("FROM " + entityClass.getName(), entityClass)
-                    .list();
+            entities = session.createQuery("FROM " + Sales.class.getName(), Sales.class).list();
             transaction.commit();
         } catch (Exception e) {
             if (transaction != null) {
@@ -63,7 +60,7 @@ public class SalesDao implements GenericDao<Sales>, SalesCalculations {
 
     @Override
     public void delete(Sales entity) {
-        try (Session session = setUp()){
+        try (Session session = setUp()) {
             transaction = session.beginTransaction();
             session.delete(entity);
             transaction.commit();
@@ -77,7 +74,7 @@ public class SalesDao implements GenericDao<Sales>, SalesCalculations {
 
     @Override
     public void deleteById(Long id) {
-        try(Session session = setUp()) {
+        try (Session session = setUp()) {
             transaction = session.beginTransaction();
             Sales entity = session.get(Sales.class, id);
             if (entity != null) {
@@ -91,9 +88,10 @@ public class SalesDao implements GenericDao<Sales>, SalesCalculations {
             e.printStackTrace();
         }
     }
+
     @Override
     public Sales save(Sales entity) {
-        try(Session session = setUp()) {
+        try (Session session = setUp()) {
             transaction = session.beginTransaction();
             Long generatedId = (Long) session.save(entity);
             transaction.commit();
@@ -105,12 +103,13 @@ public class SalesDao implements GenericDao<Sales>, SalesCalculations {
             }
             e.printStackTrace();
         }
+
         return null;
     }
 
     @Override
     public void updateEntity(Sales entity) {
-        try(Session session = setUp()) {
+        try (Session session = setUp()) {
             transaction = session.beginTransaction();
             session.update(entity);
             transaction.commit();
@@ -124,73 +123,48 @@ public class SalesDao implements GenericDao<Sales>, SalesCalculations {
 
     @Override
     public double getCalculatedPercentageForUser(Long userId) {
-        User user = userDao.findById(userId, User.class);
-        double percentage = 0;
-
-        if ("Maximum".equals(user.getCompany())) {
-            percentage += 5;
-        }
-
-        double sumOfPurchases =
-                getAllEntities(Sales.class)
-                .stream()
-                .filter(sale -> sale.getUser().getId().equals(userId))
-                .mapToDouble(sale -> sale.getPaidAmount().doubleValue())
-                .sum();
-
-        if (sumOfPurchases >= 10000) {
-            percentage += 5;
-        }
-
-        if (user.getLegalEntity()) {
-            percentage += 3;
-        }
-
-        return percentage;
+        User user = userDao.findById(userId);
+        double sumOfUserPurchases = getTotalSumOfUserPurchaces(userId);
+        return (sumOfUserPurchases >= 10000 ? 5 : 0)
+                + (user.getLegalEntity() ? 3 : 0)
+                + ("Maximum".equals(user.getCompany()) ? 5 : 0);
     }
 
     @Override
     public double getPriceWithDiscount(double discount, Long productId) {
-        Product product = productDao.findById(productId,Product.class);
-        return product.getPrice() - (product.getPrice()/100*discount);
+        Product product = productDao.findById(productId);
+        return product.getPrice() - (product.getPrice() / 100 * discount);
     }
 
     @Override
-    public double getDiscountPercentageFromPaidAmount(Long salesId){
-        Sales sales = findById(salesId, Sales.class);
+    public double getDiscountPercentageFromPaidAmount(Long salesId) {
+        Sales sales = findById(salesId);
         Product product = sales.getProduct();
-        return 100*((product.getPrice()-sales.getPaidAmount().doubleValue())/((product.getPrice())));
+        return 100 * ((product.getPrice() - sales.getPaidAmount().doubleValue()) / ((product.getPrice())));
     }
 
     @Override
     public double getPercentageOfSalesPerYear(Year year) {
-        List<Sales> sales = getAllEntities(Sales.class);
+        double amountOfSales = getAllEntities().size();
+        long salesAmountPerYear = getSalesAmountForProvidedYear(year);
+        return (salesAmountPerYear / amountOfSales) * 100;
+    }
 
-        long salesForTheYear = sales.stream()
+    private long getSalesAmountForProvidedYear(Year year) {
+        return getAllEntities()
+                .stream()
                 .filter(sale -> {
                     LocalDate purchaseDate = sale.getPurchaseDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
                     return Year.from(purchaseDate).equals(year);
                 })
                 .count();
+    }
 
-        if (salesForTheYear != 0) {
-            return (salesForTheYear / (double) sales.size()) * 100;
-        } else {
-            return 0;
-        }
+    private double getTotalSumOfUserPurchaces(Long userId) {
+        return getAllEntities()
+                .stream()
+                .filter(sale -> sale.getUser().getId().equals(userId))
+                .mapToDouble(sale -> sale.getPaidAmount().doubleValue())
+                .sum();
     }
 }
-
-
-//    public double getPercentageOfSalesPerYear(Year year){
-//        List<Sales> sales = getAllEntities(Sales.class);
-//        double salesRecords = sales.size();
-//        double salesForTheYear = 0;
-//        for (Sales sale : sales){
-//            Year thisYear = Year.of(sale.getPurchaseDate().getYear());
-//            if(thisYear.equals(year)){
-//                salesForTheYear++;
-//            }
-//        }
-//        return salesForTheYear / salesRecords * 100;
-//    }

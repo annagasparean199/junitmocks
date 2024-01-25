@@ -1,15 +1,15 @@
-package org.example.DAO;
+package org.example.dao;
 
 import org.hibernate.Session;
-
 import java.util.List;
 
 public interface GenericDao<T> {
 
     Session setUp();
 
-    T findById(Long id, Class<T> entityClass);
-    List<T> getAllEntities(Class<T> entityClass);
+    T findById(Long id);
+
+    List<T> getAllEntities();
 
     void delete(T entity);
 
@@ -18,4 +18,5 @@ public interface GenericDao<T> {
     T save(T entity);
 
     void updateEntity(T entity);
+
 }

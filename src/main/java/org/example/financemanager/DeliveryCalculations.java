@@ -1,4 +1,4 @@
-package org.example.interfaces;
+package org.example.financemanager;
 
 public interface DeliveryCalculations {
 

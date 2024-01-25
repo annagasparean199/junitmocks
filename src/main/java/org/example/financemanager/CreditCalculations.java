@@ -1,9 +1,6 @@
-package org.example.interfaces;
+package org.example.financemanager;
 
-import org.example.entity.Credit;
-
-import java.time.LocalDate;
-
+import org.example.entities.Credit;
 
 public interface CreditCalculations {
 
@@ -14,8 +11,6 @@ public interface CreditCalculations {
     Double getTotalPriceForPersonCreditsPerMonth(Long userId, int month);
 
     double getTotalAmountForPayedCredits(Long userId);
-
-    int calculatePayedMonths(LocalDate paymentDate, Credit credit);
 
     double getTotalAmountForRemainCredits(Long userId);
 }

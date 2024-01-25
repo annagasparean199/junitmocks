@@ -1,7 +1,6 @@
-package org.example.interfaces;
+package org.example.financemanager;
 
 import java.time.Year;
-
 
 public interface SalesCalculations {
 

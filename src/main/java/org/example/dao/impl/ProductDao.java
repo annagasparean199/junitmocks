@@ -1,15 +1,14 @@
-package org.example.DAO.DAOImpl;
+package org.example.dao.impl;
 
-import org.example.DAO.GenericDao;
-import org.example.entity.User;
+import org.example.dao.GenericDao;
+import org.example.entities.Product;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-
 import java.util.List;
 
-import static org.example.DAO.DAOImpl.HibernateUtility.getSessionFactory;
+import static org.example.dao.impl.HibernateUtility.getSessionFactory;
 
-public class UserDao implements GenericDao<User> {
+public class ProductDao implements GenericDao<Product> {
 
     Session session;
     Transaction transaction;
@@ -20,11 +19,11 @@ public class UserDao implements GenericDao<User> {
     }
 
     @Override
-    public User findById(Long id, Class<User> entityClass) {
-        User entity = null;
+    public Product findById(Long id) {
+        Product entity = null;
         try (Session session = setUp()) {
             transaction = session.beginTransaction();
-            entity = session.get(entityClass, id);
+            entity = session.get(Product.class, id);
             transaction.commit();
         } catch (Exception e) {
             if (transaction != null) {
@@ -36,12 +35,11 @@ public class UserDao implements GenericDao<User> {
     }
 
     @Override
-    public List<User> getAllEntities(Class<User> entityClass) {
-        List<User> entities = null;
+    public List<Product> getAllEntities() {
+        List<Product> entities = null;
         try (Session session = setUp()) {
             transaction = session.beginTransaction();
-            entities = session.createQuery("FROM " + entityClass.getName(), entityClass)
-                    .list();
+            entities = session.createQuery("FROM " + Product.class.getName(), Product.class).list();
             transaction.commit();
         } catch (Exception e) {
             if (transaction != null) {
@@ -53,7 +51,7 @@ public class UserDao implements GenericDao<User> {
     }
 
     @Override
-    public void delete(User entity) {
+    public void delete(Product entity) {
         try (Session session = setUp()) {
             transaction = session.beginTransaction();
             session.delete(entity);
@@ -70,7 +68,7 @@ public class UserDao implements GenericDao<User> {
     public void deleteById(Long id) {
         try (Session session = setUp()) {
             transaction = session.beginTransaction();
-            User entity = session.get(User.class, id);
+            Product entity = session.get(Product.class, id);
             if (entity != null) {
                 session.delete(entity);
             }
@@ -84,12 +82,12 @@ public class UserDao implements GenericDao<User> {
     }
 
     @Override
-    public User save(User entity) {
+    public Product save(Product entity) {
         try (Session session = setUp()) {
             transaction = session.beginTransaction();
             Long generatedId = (Long) session.save(entity);
             transaction.commit();
-            entity = session.get(User.class, generatedId);
+            entity = session.get(Product.class, generatedId);
             return entity;
         } catch (Exception e) {
             if (transaction != null) {
@@ -101,7 +99,7 @@ public class UserDao implements GenericDao<User> {
     }
 
     @Override
-    public void updateEntity(User entity) {
+    public void updateEntity(Product entity) {
         try (Session session = setUp()) {
             transaction = session.beginTransaction();
             session.update(entity);

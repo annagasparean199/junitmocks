@@ -1,14 +1,15 @@
-package org.example.DAO.DAOImpl;
+package org.example.dao.impl;
 
-import org.example.entity.Credit;
-import org.example.entity.Delivery;
-import org.example.entity.Product;
-import org.example.entity.Sales;
-import org.example.entity.User;
+import org.example.entities.Credit;
+import org.example.entities.Delivery;
+import org.example.entities.Product;
+import org.example.entities.Sales;
+import org.example.entities.User;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
 public class HibernateUtility {
+
     private static final SessionFactory sessionFactory;
 
     static {
@@ -22,6 +23,7 @@ public class HibernateUtility {
             configuration.addAnnotatedClass(Credit.class);
 
             sessionFactory = configuration.buildSessionFactory();
+
         } catch (Exception ex) {
             throw new ExceptionInInitializerError(ex);
         }

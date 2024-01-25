@@ -1,30 +1,29 @@
-package org.example.DAO.DAOImpl;
+package org.example.dao.impl;
 
-import org.example.DAO.GenericDao;
-import org.example.entity.Product;
+import org.example.dao.GenericDao;
+import org.example.entities.User;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-
 import java.util.List;
 
-import static org.example.DAO.DAOImpl.HibernateUtility.getSessionFactory;
+import static org.example.dao.impl.HibernateUtility.getSessionFactory;
 
-public class ProductDao implements GenericDao<Product> {
+public class UserDao implements GenericDao<User> {
 
     Session session;
     Transaction transaction;
 
-    public Session setUp(){
+    public Session setUp() {
         session = getSessionFactory().openSession();
         return session;
     }
 
     @Override
-    public Product findById(Long id, Class<Product> entityClass) {
-        Product entity = null;
-        try(Session session = setUp()) {
+    public User findById(Long id) {
+        User entity = null;
+        try (Session session = setUp()) {
             transaction = session.beginTransaction();
-            entity = session.get(entityClass, id);
+            entity = session.get(User.class, id);
             transaction.commit();
         } catch (Exception e) {
             if (transaction != null) {
@@ -36,12 +35,11 @@ public class ProductDao implements GenericDao<Product> {
     }
 
     @Override
-    public List<Product> getAllEntities(Class<Product> entityClass) {
-        List<Product> entities = null;
+    public List<User> getAllEntities() {
+        List<User> entities = null;
         try (Session session = setUp()) {
             transaction = session.beginTransaction();
-            entities = session.createQuery("FROM " + entityClass.getName(), entityClass)
-                    .list();
+            entities = session.createQuery("FROM " + User.class.getName(), User.class).list();
             transaction.commit();
         } catch (Exception e) {
             if (transaction != null) {
@@ -53,8 +51,8 @@ public class ProductDao implements GenericDao<Product> {
     }
 
     @Override
-    public void delete(Product entity) {
-        try (Session session = setUp()){
+    public void delete(User entity) {
+        try (Session session = setUp()) {
             transaction = session.beginTransaction();
             session.delete(entity);
             transaction.commit();
@@ -63,14 +61,15 @@ public class ProductDao implements GenericDao<Product> {
                 transaction.rollback();
             }
             e.printStackTrace();
+
         }
     }
 
     @Override
     public void deleteById(Long id) {
-        try(Session session = setUp()) {
+        try (Session session = setUp()) {
             transaction = session.beginTransaction();
-            Product entity = session.get(Product.class, id);
+            User entity = session.get(User.class, id);
             if (entity != null) {
                 session.delete(entity);
             }
@@ -82,13 +81,14 @@ public class ProductDao implements GenericDao<Product> {
             e.printStackTrace();
         }
     }
+
     @Override
-    public Product save(Product entity) {
-        try(Session session = setUp()) {
+    public User save(User entity) {
+        try (Session session = setUp()) {
             transaction = session.beginTransaction();
             Long generatedId = (Long) session.save(entity);
             transaction.commit();
-            entity = session.get(Product.class, generatedId);
+            entity = session.get(User.class, generatedId);
             return entity;
         } catch (Exception e) {
             if (transaction != null) {
@@ -100,8 +100,8 @@ public class ProductDao implements GenericDao<Product> {
     }
 
     @Override
-    public void updateEntity(Product entity) {
-        try(Session session = setUp()) {
+    public void updateEntity(User entity) {
+        try (Session session = setUp()) {
             transaction = session.beginTransaction();
             session.update(entity);
             transaction.commit();

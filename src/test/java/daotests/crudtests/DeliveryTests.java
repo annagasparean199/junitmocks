@@ -1,7 +1,7 @@
-package DAOtests;
+package daotests.crudtests;
 
-import org.example.DAO.DAOImpl.ProductDao;
-import org.example.entity.Product;
+import org.example.dao.impl.DeliveryDao;
+import org.example.entities.Delivery;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
@@ -14,60 +14,58 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.Spy;
 import org.mockito.junit.MockitoJUnitRunner;
-
 import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
-
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
-import static utils.Utils.product1;
-import static utils.Utils.product2;
+import static utils.Utils.microwaveDelivery;
+import static utils.Utils.phoneDelivery;
 
 @RunWith(MockitoJUnitRunner.class)
-public class ProductTests {
+public class DeliveryTests {
 
     @BeforeEach
     public void setUp() {
         MockitoAnnotations.openMocks(this);
     }
-    @Mock
-    Session session = mock(Session.class);
-    @Mock
-    Transaction transaction = mock(Transaction.class);
 
+    @Mock
+    private Session session;
+    @Mock
+    private Transaction transaction;
     @InjectMocks
     @Spy
-    private ProductDao productDao;
+    private DeliveryDao deliveryDao;
 
     @Test
     public void testFindByIdEntityFound() {
-        doReturn(session).when(productDao).setUp();
+        doReturn(session).when(deliveryDao).setUp();
         doReturn(transaction).when(session).beginTransaction();
-        doReturn(product1).when(session).get(eq(Product.class), eq(product1.getId()));
+        doReturn(microwaveDelivery).when(session).get(eq(Delivery.class), eq(1L));
 
-        Product result = productDao.findById(product1.getId(), Product.class);
+        Delivery result = deliveryDao.findById(1L);
         assertNotNull(result);
-        Assertions.assertEquals(product1, result);
+        Assertions.assertEquals(microwaveDelivery, result);
     }
 
     @Test
     public void testFindAllEntities() {
-        doReturn(session).when(productDao).setUp();
+        doReturn(session).when(deliveryDao).setUp();
         doReturn(transaction).when(session).beginTransaction();
-        List<Product> products = Arrays.asList(product1, product2);
-        Query<Product> query = mock(Query.class);
-        doReturn(query).when(session).createQuery(anyString(), eq(Product.class));
-        doReturn(products).when(query).list();
+        List<Delivery> deliveries = Arrays.asList(microwaveDelivery, phoneDelivery);
+        Query<Delivery> query = mock(Query.class);
+        doReturn(query).when(session).createQuery(anyString(), eq(Delivery.class));
+        doReturn(deliveries).when(query).list();
 
-        List<Product> result = productDao.getAllEntities(Product.class);
+        List<Delivery> result = deliveryDao.getAllEntities();
 
         assertNotNull(result);
-        Assertions.assertEquals(products, result);
+        Assertions.assertEquals(deliveries, result);
 
         verify(transaction).commit();
         verify(session).close();
@@ -75,49 +73,49 @@ public class ProductTests {
 
     @Test
     public void testDeleteDeliveryEntity() {
-        doReturn(session).when(productDao).setUp();
+        doReturn(session).when(deliveryDao).setUp();
         doReturn(transaction).when(session).beginTransaction();
 
-        productDao.delete(product1);
+        deliveryDao.delete(microwaveDelivery);
 
-        verify(session).delete(product1);
+        verify(session).delete(microwaveDelivery);
         verify(transaction).commit();
         verify(session).close();
     }
 
     @Test
     public void testDeleteById() {
-        doReturn(session).when(productDao).setUp();
+        doReturn(session).when(deliveryDao).setUp();
         doReturn(transaction).when(session).beginTransaction();
-        doReturn(product1).when(session).get(eq(Product.class), eq(product1.getId()));
+        doReturn(microwaveDelivery).when(session).get(eq(Delivery.class), eq(microwaveDelivery.getId()));
 
-        productDao.deleteById(product1.getId());
+        deliveryDao.deleteById(microwaveDelivery.getId());
 
-        verify(session).delete(product1);
+        verify(session).delete(microwaveDelivery);
         verify(transaction).commit();
         verify(session).close();
     }
 
     @Test
     public void testSaveDeliveryEntity() {
-        doReturn(session).when(productDao).setUp();
+        doReturn(session).when(deliveryDao).setUp();
         doReturn(transaction).when(session).beginTransaction();
 
-        productDao.save(product1);
+        deliveryDao.save(microwaveDelivery);
 
-        verify(session).save(product1);
+        verify(session).save(microwaveDelivery);
         verify(transaction).commit();
         verify(session).close();
     }
 
     @Test
-    public void updateDeliveryEntity(){
-        doReturn(session).when(productDao).setUp();
+    public void updateDeliveryEntity() {
+        doReturn(session).when(deliveryDao).setUp();
         doReturn(transaction).when(session).beginTransaction();
 
-        productDao.updateEntity(product1);
+        deliveryDao.updateEntity(microwaveDelivery);
 
-        verify(session).update(product1);
+        verify(session).update(microwaveDelivery);
         verify(transaction).commit();
         verify(session).close();
     }
