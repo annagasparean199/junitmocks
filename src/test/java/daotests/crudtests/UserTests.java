@@ -14,6 +14,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.Spy;
 import org.mockito.junit.MockitoJUnitRunner;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -23,8 +24,8 @@ import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
-import static utils.Utils.productMicrowave;
 import static utils.Utils.defaultUser;
+import static utils.Utils.productMicrowave;
 import static utils.Utils.secondaryUser;
 
 @RunWith(MockitoJUnitRunner.class)

@@ -1,6 +1,7 @@
 package org.example.dao;
 
 import org.hibernate.Session;
+
 import java.util.List;
 
 public interface GenericDao<T> {

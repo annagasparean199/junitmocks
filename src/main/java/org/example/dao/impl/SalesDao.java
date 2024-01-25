@@ -7,6 +7,7 @@ import org.example.entities.User;
 import org.example.financemanager.SalesCalculations;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+
 import java.time.LocalDate;
 import java.time.Year;
 import java.time.ZoneId;

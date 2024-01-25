@@ -12,19 +12,19 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.Spy;
 import org.mockito.junit.MockitoJUnitRunner;
+
 import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.Date;
 
-
-import static org.mockito.Mockito.when;
 import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.when;
+import static utils.Utils.defaultUser;
+import static utils.Utils.microwaveSales;
 import static utils.Utils.microwaveSalesCredit;
+import static utils.Utils.phoneSales;
 import static utils.Utils.phoneSalesCredit;
 import static utils.Utils.productMicrowave;
-import static utils.Utils.microwaveSales;
-import static utils.Utils.phoneSales;
-import static utils.Utils.defaultUser;
 
 @Log4j
 @RunWith(MockitoJUnitRunner.class)

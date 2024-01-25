@@ -11,6 +11,7 @@ import org.example.entities.Product;
 import org.example.entities.Sales;
 import org.example.entities.User;
 import org.junit.jupiter.api.BeforeAll;
+
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.UUID;

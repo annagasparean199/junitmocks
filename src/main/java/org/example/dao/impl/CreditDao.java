@@ -6,9 +6,10 @@ import org.example.entities.Sales;
 import org.example.financemanager.CreditCalculations;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+
 import java.text.SimpleDateFormat;
-import java.time.Period;
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 

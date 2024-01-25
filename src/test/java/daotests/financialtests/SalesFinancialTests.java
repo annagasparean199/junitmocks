@@ -12,6 +12,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.Spy;
 import org.mockito.junit.MockitoJUnitRunner;
+
 import java.math.BigDecimal;
 import java.time.Year;
 import java.util.Arrays;
@@ -19,10 +20,10 @@ import java.util.Date;
 
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doReturn;
-import static utils.Utils.productMicrowave;
+import static utils.Utils.defaultUser;
 import static utils.Utils.microwaveSales;
 import static utils.Utils.phoneSales;
-import static utils.Utils.defaultUser;
+import static utils.Utils.productMicrowave;
 
 @RunWith(MockitoJUnitRunner.class)
 public class SalesFinancialTests {
