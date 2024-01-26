@@ -6,7 +6,6 @@ import org.example.entities.Sales;
 import org.example.financemanager.CreditCalculations;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.Period;
@@ -26,6 +25,9 @@ public class CreditDao implements GenericDao<Credit>, CreditCalculations {
         return session;
     }
 
+    public int getPriorityOfInsertionInDatabase(){
+        return 5;
+    }
 
     @Override
     public Credit findById(Long id) {

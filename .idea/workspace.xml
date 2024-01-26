@@ -23,8 +23,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Interface" />
         <option value="Class" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
@@ -59,25 +59,25 @@
   <component name="ProjectViewState">
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/CRME121/Desktop&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.sourceCode.Java&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "last_opened_file_path": "C:/Users/CRME121/Desktop",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "preferences.sourceCode.CSV/TSV/PSV"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;GitStage.ChangesTree.GroupingKeys&quot;: [
-      &quot;directory&quot;,
-      &quot;module&quot;,
-      &quot;repository&quot;
+  "keyToStringList": {
+    "GitStage.ChangesTree.GroupingKeys": [
+      "directory",
+      "module",
+      "repository"
     ]
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\CRME121\IdeaProjects\junitmocks\src\main\java\org\example\DAO\DAOImpl" />
@@ -86,7 +86,7 @@
       <recent name="" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.CreditTestsDb">
+  <component name="RunManager" selected="JUnit.CreditTestsDb.test">
     <configuration name="CreditFinancialTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="junitmocks" />
       <extension name="coverage">
@@ -121,7 +121,24 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="DeliveryTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="CreditTestsDb.test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="junitmocks" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="daotests.dbtests.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="daotests.dbtests" />
+      <option name="MAIN_CLASS_NAME" value="daotests.dbtests.CreditTestsDb" />
+      <option name="METHOD_NAME" value="test" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" value="-Xshare:off" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CreditTests.testFindByIdEntityFound" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="junitmocks" />
       <extension name="coverage">
         <pattern>
@@ -130,9 +147,9 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="daotests.crudtests" />
-      <option name="MAIN_CLASS_NAME" value="daotests.crudtests.DeliveryTests" />
-      <option name="METHOD_NAME" value="" />
-      <option name="TEST_OBJECT" value="class" />
+      <option name="MAIN_CLASS_NAME" value="daotests.crudtests.CreditTests" />
+      <option name="METHOD_NAME" value="testFindByIdEntityFound" />
+      <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" value="-Xshare:off" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -155,23 +172,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="SalesFinancialTests.testPercentageOfSalesPerYear" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="junitmocks" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="daotests.financialtests.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="daotests.financialtests" />
-      <option name="MAIN_CLASS_NAME" value="daotests.financialtests.SalesFinancialTests" />
-      <option name="METHOD_NAME" value="testPercentageOfSalesPerYear" />
-      <option name="TEST_OBJECT" value="method" />
-      <option name="VM_PARAMETERS" value="-Xshare:off" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration default="true" type="JUnit" factoryName="JUnit">
       <module name="junitmocks" />
       <option name="PACKAGE_NAME" value="" />
@@ -185,11 +185,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.CreditTestsDb.test" />
+        <item itemvalue="JUnit.CreditTests.testFindByIdEntityFound" />
         <item itemvalue="JUnit.CreditTestsDb" />
         <item itemvalue="JUnit.CreditFinancialTests" />
         <item itemvalue="JUnit.SalesFinancialTests" />
-        <item itemvalue="JUnit.SalesFinancialTests.testPercentageOfSalesPerYear" />
-        <item itemvalue="JUnit.DeliveryTests" />
       </list>
     </recent_temporary>
   </component>
@@ -279,7 +279,21 @@
       <option name="project" value="LOCAL" />
       <updated>1706082724089</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Refactored methods - private auxiliary methods">
+      <created>1706198123414</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1706198123414</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Refactored methods - private auxiliary methods">
+      <created>1706198154093</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1706198154093</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -304,7 +318,8 @@
     <MESSAGE value="9" />
     <MESSAGE value="10" />
     <MESSAGE value="11" />
-    <option name="LAST_COMMIT_MESSAGE" value="11" />
+    <MESSAGE value="Refactored methods - private auxiliary methods" />
+    <option name="LAST_COMMIT_MESSAGE" value="Refactored methods - private auxiliary methods" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">

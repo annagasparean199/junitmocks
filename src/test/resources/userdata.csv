@@ -1,0 +1,4 @@
+id,salary,uuid,legal_entity,company,name
+1,50000.00,123e4567-e89b-12d3-a456-426614174001,true,CompanyA,John Doe
+2,60000.00,123e4567-e89b-12d3-a456-426614174002,false,CompanyB,Jane Doe
+3,75000.00,123e4567-e89b-12d3-a456-426614174003,true,CompanyC,Bob Smith

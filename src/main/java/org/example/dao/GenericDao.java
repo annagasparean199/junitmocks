@@ -20,4 +20,5 @@ public interface GenericDao<T> {
 
     void updateEntity(T entity);
 
+    int getPriorityOfInsertionInDatabase();
 }

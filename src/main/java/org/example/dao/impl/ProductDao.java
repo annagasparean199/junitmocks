@@ -4,7 +4,6 @@ import org.example.dao.GenericDao;
 import org.example.entities.Product;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-
 import java.util.List;
 
 import static org.example.dao.impl.HibernateUtility.getSessionFactory;
@@ -17,6 +16,10 @@ public class ProductDao implements GenericDao<Product> {
     public Session setUp() {
         session = getSessionFactory().openSession();
         return session;
+    }
+
+    public int getPriorityOfInsertionInDatabase(){
+        return 1;
     }
 
     @Override

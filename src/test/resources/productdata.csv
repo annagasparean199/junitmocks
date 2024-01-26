@@ -1,0 +1,6 @@
+id,color,quantity,name,price,in_stock
+1,Red,50,ProductA,100.00,true
+2,Blue,30,ProductB,75.00,false
+3,Green,40,ProductC,120.00,true
+4,Yellow,25,ProductD,90.00,true
+5,Black,60,ProductE,150.00,false

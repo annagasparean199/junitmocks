@@ -7,7 +7,6 @@ import org.example.entities.User;
 import org.example.financemanager.SalesCalculations;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-
 import java.time.LocalDate;
 import java.time.Year;
 import java.time.ZoneId;
@@ -26,6 +25,11 @@ public class SalesDao implements GenericDao<Sales>, SalesCalculations {
         session = getSessionFactory().openSession();
         return session;
     }
+
+    public int getPriorityOfInsertionInDatabase(){
+        return 3;
+    }
+
 
     @Override
     public Sales findById(Long id) {
