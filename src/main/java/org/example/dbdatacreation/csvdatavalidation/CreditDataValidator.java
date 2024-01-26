@@ -1,6 +1,8 @@
 package org.example.dbdatacreation.csvdatavalidation;
+
 import org.example.entities.Credit;
 import org.example.entities.Sales;
+
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.HashSet;

@@ -1,8 +1,8 @@
 package org.example.dbdatacreation.databaseinsertioncsv;
 
+import org.example.dao.impl.CreditDao;
 import org.example.dbdatacreation.csvdatavalidation.CreditDataValidator;
 import org.example.dbdatacreation.csventityreaders.CreditCSVReader;
-import org.example.dao.impl.CreditDao;
 import org.example.entities.Credit;
 
 import java.util.List;

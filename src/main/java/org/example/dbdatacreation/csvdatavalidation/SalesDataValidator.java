@@ -1,6 +1,7 @@
 package org.example.dbdatacreation.csvdatavalidation;
-import org.example.entities.Sales;
+
 import org.example.entities.Product;
+import org.example.entities.Sales;
 import org.example.entities.User;
 
 import java.math.BigDecimal;

@@ -1,8 +1,8 @@
 package org.example.dbdatacreation.databaseinsertioncsv;
 
+import org.example.dao.impl.UserDao;
 import org.example.dbdatacreation.csvdatavalidation.UserDataValidator;
 import org.example.dbdatacreation.csventityreaders.UserCSVReader;
-import org.example.dao.impl.UserDao;
 import org.example.entities.User;
 
 import java.util.List;

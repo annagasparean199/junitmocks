@@ -4,6 +4,7 @@ import org.example.dao.GenericDao;
 import org.example.entities.User;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+
 import java.util.List;
 
 import static org.example.dao.impl.HibernateUtility.getSessionFactory;
