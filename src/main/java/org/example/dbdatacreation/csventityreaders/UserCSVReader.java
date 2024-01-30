@@ -32,7 +32,6 @@ public class UserCSVReader implements GenericCSVReader<User>{
 
     private User createUserFromCSV(String[] data) {
         User.UserBuilder userBuilder = User.builder();
-
         userBuilder.id(Long.parseLong(data[0].trim()))
                 .salary(Double.parseDouble(data[1].trim()))
                 .uuid(UUID.fromString(data[2].trim()))

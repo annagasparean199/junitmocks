@@ -7,12 +7,16 @@ import org.example.entities.Sales;
 
 import java.util.List;
 
-public class SalesDdInserter implements GenericDbInserter{
+public class SalesDbInserter implements GenericDbInserter{
 
     private static final String CSV_SALES_PATH = "src/test/resources/salesdata.csv";
     SalesCSVReader csvReader = new SalesCSVReader();
     SalesDataValidator dataValidator = new SalesDataValidator();
     SalesDao salesDao = new SalesDao();
+
+    public int getPriorityOfInsertionInDatabase(){
+        return 3;
+    }
 
     public void processCreatedDataAndInsertIntoDB() {
 

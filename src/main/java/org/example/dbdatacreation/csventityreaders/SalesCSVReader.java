@@ -19,7 +19,7 @@ public class SalesCSVReader implements GenericCSVReader<Sales>{
     ProductDao productDao = new ProductDao();
     UserDao userDao = new UserDao();
 
-    private static final String PATTERN_DATE_FORMAT = "MM/dd/yyyy";
+    private static final String PATTERN_DATE_FORMAT = "yyyy-MM-dd";
 
     public List<Sales> readFromCSV(String filePath) {
         List<Sales> salesList = new ArrayList<>();

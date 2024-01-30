@@ -14,6 +14,10 @@ public class CreditDbInserter implements GenericDbInserter{
     CreditDataValidator dataValidator = new CreditDataValidator();
     CreditDao creditDao = new CreditDao();
 
+    public int getPriorityOfInsertionInDatabase(){
+        return 5;
+    }
+
     public void processCreatedDataAndInsertIntoDB() {
 
         List<Credit> entities = csvReader.readFromCSV(CSV_CREDITS_PATH);

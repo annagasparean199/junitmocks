@@ -14,6 +14,10 @@ public class UserDbInserter implements GenericDbInserter{
     UserDataValidator dataValidator = new UserDataValidator();
     UserDao userDao = new UserDao();
 
+    public int getPriorityOfInsertionInDatabase(){
+        return 2;
+    }
+
     public void processCreatedDataAndInsertIntoDB() {
 
         List<User> entities = csvReader.readFromCSV(CSV_USER_PATH);

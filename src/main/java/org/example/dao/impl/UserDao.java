@@ -19,10 +19,6 @@ public class UserDao implements GenericDao<User> {
         return session;
     }
 
-    public int getPriorityOfInsertionInDatabase(){
-        return 2;
-    }
-
     @Override
     public User findById(Long id) {
         User entity = null;

@@ -29,7 +29,7 @@ public class CreditDataValidator implements GenericDataValidator<Credit> {
         }
 
         private boolean isValidMonths(Integer months) {
-            return months != null && months > 0 && months < 13;
+            return months != null && months > 0;
         }
 
         private boolean isUniqueSalesId(Sales sales) {

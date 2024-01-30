@@ -27,11 +27,6 @@ public class SalesDao implements GenericDao<Sales>, SalesCalculations {
         return session;
     }
 
-    public int getPriorityOfInsertionInDatabase(){
-        return 3;
-    }
-
-
     @Override
     public Sales findById(Long id) {
         Sales entity = null;

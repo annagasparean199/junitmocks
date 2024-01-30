@@ -14,6 +14,10 @@ public class ProductDbInserter implements GenericDbInserter{
     ProductDataValidator dataValidator = new ProductDataValidator();
     ProductDao productDao = new ProductDao();
 
+    public int getPriorityOfInsertionInDatabase(){
+        return 1;
+    }
+
     public void processCreatedDataAndInsertIntoDB() {
 
         List<Product> entities = csvReader.readFromCSV(CSV_PRODUCT_PATH);

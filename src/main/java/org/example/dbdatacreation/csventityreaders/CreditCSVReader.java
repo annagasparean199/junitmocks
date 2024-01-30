@@ -16,7 +16,6 @@ import java.util.List;
 public class CreditCSVReader implements GenericCSVReader<Credit>{
 
     SalesDao salesDao = new SalesDao();
-    private final String CSV_CREDITS_PATH = "src/test/resources/creditdata.csv";
 
     public List<Credit> readFromCSV(String filePath) {
         List<Credit> credits = new ArrayList<>();

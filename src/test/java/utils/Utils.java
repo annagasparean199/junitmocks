@@ -10,7 +10,6 @@ import org.example.entities.Delivery;
 import org.example.entities.Product;
 import org.example.entities.Sales;
 import org.example.entities.User;
-import org.junit.jupiter.api.BeforeAll;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -24,7 +23,7 @@ public class Utils {
     static DeliveryDao deliveryDao = new DeliveryDao();
     static UserDao userDao = new UserDao();
 
-    @BeforeAll
+   // @BeforeAll
     public static void createUtils() {
 
         productDao.save(productMicrowave);

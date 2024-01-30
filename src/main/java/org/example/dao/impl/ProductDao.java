@@ -19,10 +19,6 @@ public class ProductDao implements GenericDao<Product> {
         return session;
     }
 
-    public int getPriorityOfInsertionInDatabase(){
-        return 1;
-    }
-
     @Override
     public Product findById(Long id) {
         Product entity = null;

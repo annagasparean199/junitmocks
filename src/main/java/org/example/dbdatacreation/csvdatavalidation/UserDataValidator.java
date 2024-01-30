@@ -6,7 +6,7 @@ import java.util.UUID;
 
 public class UserDataValidator implements GenericDataValidator<User> {
 
-    private static final String REGEX_FOR_UUID = "[0-9\\-]+";
+    private static final String REGEX_FOR_UUID = "[0-9a-zA-Z\\-]+";
 
     public boolean isValid(User user) {
         return isValidId(user.getId()) &&

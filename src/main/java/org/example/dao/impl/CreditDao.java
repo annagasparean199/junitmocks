@@ -26,10 +26,6 @@ public class CreditDao implements GenericDao<Credit>, CreditCalculations {
         return session;
     }
 
-    public int getPriorityOfInsertionInDatabase(){
-        return 5;
-    }
-
     @Override
     public Credit findById(Long id) {
         Credit entity = null;

@@ -1,5 +1,6 @@
 import org.example.dao.impl.HibernateUtility;
 import org.hibernate.SessionFactory;
+import utils.ConsoleEntitiesCreator;
 
 public class Main {
 
@@ -7,5 +8,7 @@ public class Main {
 
         SessionFactory sessionFactory = HibernateUtility.getSessionFactory();
         sessionFactory.openSession();
+        ConsoleEntitiesCreator consoleEntitiesCreator = new ConsoleEntitiesCreator();
+        consoleEntitiesCreator.createEntitiesFromConsole();
     }
 }

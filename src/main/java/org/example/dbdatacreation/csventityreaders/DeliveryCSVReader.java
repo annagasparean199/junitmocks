@@ -15,7 +15,7 @@ import java.util.List;
 public class DeliveryCSVReader  implements GenericCSVReader<Delivery>{
 
     ProductDao productDao = new ProductDao();
-    private static final String PATTERN_DATE_FORMAT = "M/d/yyyy";
+    private static final String PATTERN_DATE_FORMAT = "yyyy-MM-dd";
 
     public List<Delivery> readFromCSV(String filePath) {
         List<Delivery> deliveries = new ArrayList<>();
