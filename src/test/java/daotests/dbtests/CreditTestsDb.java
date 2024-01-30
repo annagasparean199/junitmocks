@@ -5,7 +5,6 @@ import org.example.entities.Credit;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import utils.ConsoleEntitiesCreator;
 import utils.TestDataFromCSV;
 
 import java.math.BigDecimal;
