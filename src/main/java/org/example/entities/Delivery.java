@@ -22,7 +22,7 @@ import java.util.Date;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
+@Entity(name = "Delivery")
 @Table(name = "Delivery")
 public class Delivery {
 

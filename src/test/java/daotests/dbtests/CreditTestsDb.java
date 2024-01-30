@@ -21,17 +21,11 @@ import static utils.Utils.secondaryPhoneSale;
 public class CreditTestsDb {
 
 
-   // @BeforeAll
+    @BeforeAll
     public static void create() {
         TestDataFromCSV testDataFromCSV = new TestDataFromCSV();
         testDataFromCSV.processDaosInOrderAndSaveObjectsInDb();
     }
-    @BeforeAll
-    public static void createData(){
-        ConsoleEntitiesCreator consoleEntitiesCreator = new ConsoleEntitiesCreator();
-        consoleEntitiesCreator.createEntitiesFromConsole();
-    }
-
 
     @Test
     public void testFindByIdEntityFound() {

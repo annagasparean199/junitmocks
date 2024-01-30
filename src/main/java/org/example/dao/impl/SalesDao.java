@@ -48,7 +48,7 @@ public class SalesDao implements GenericDao<Sales>, SalesCalculations {
         List<Sales> entities = null;
         try (Session session = setUp()) {
             transaction = session.beginTransaction();
-            entities = session.createQuery("FROM " + Sales.class.getName(), Sales.class).list();
+            entities = session.createQuery("FROM Sales").list();
             transaction.commit();
         } catch (Exception e) {
             if (transaction != null) {

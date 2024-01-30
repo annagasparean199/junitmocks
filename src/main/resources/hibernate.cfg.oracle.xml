@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <property name="hibernate.connection.driver_class">oracle.jdbc.OracleDriver</property>
+        <property name="hibernate.connection.url">
+            jdbc:oracle:thin:@localhost:1521:xe
+        </property>
+        <property name="hibernate.connection.username">prod</property>
+        <property name="hibernate.connection.password">Admin1234</property>
+
+        <property name="hibernate.dialect">org.hibernate.dialect.Oracle12cDialect</property>
+
+        <property name="hibernate.current_session_context_class">thread</property>
+        <property name="hibernate.globally_quoted_identifiers">true</property>
+
+        <property name="hbm2ddl.auto">create-drop</property>
+
+        <!--        <property name="hibernate.show_sql">true</property>-->
+        <property name="hibernate.format_sql">true</property>
+
+        <mapping class="org.example.entities.User"/>
+        <mapping class="org.example.entities.Delivery"/>
+        <mapping class="org.example.entities.Credit"/>
+        <mapping class="org.example.entities.Product"/>
+        <mapping class="org.example.entities.Sales"/>
+    </session-factory>
+</hibernate-configuration>

@@ -23,8 +23,8 @@ import java.util.Date;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
-@Table(name = "Credit", schema = "public")
+@Entity(name = "Credit")
+@Table(name = "Credit")
 public class Credit {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -40,7 +40,7 @@ public class UserDao implements GenericDao<User> {
         List<User> entities = null;
         try (Session session = setUp()) {
             transaction = session.beginTransaction();
-            entities = session.createQuery("FROM " + User.class.getName(), User.class).list();
+            entities = session.createQuery("FROM User").list();
             transaction.commit();
         } catch (Exception e) {
             if (transaction != null) {

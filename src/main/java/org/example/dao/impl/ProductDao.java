@@ -40,7 +40,7 @@ public class ProductDao implements GenericDao<Product> {
         List<Product> entities = null;
         try (Session session = setUp()) {
             transaction = session.beginTransaction();
-            entities = session.createQuery("FROM " + Product.class.getName(), Product.class).list();
+            entities = session.createQuery("FROM Product").list();
             transaction.commit();
         } catch (Exception e) {
             if (transaction != null) {

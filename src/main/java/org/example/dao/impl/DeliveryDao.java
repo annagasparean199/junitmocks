@@ -48,7 +48,7 @@ public class DeliveryDao implements GenericDao<Delivery>, DeliveryCalculations {
         List<Delivery> entities = null;
         try (Session session = setUp()) {
             transaction = session.beginTransaction();
-            entities = session.createQuery("FROM " + Delivery.class.getName(), Delivery.class).list();
+            entities = session.createQuery("FROM Delivery").list();
             transaction.commit();
         } catch (Exception e) {
             if (transaction != null) {

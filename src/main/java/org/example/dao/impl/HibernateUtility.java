@@ -14,7 +14,7 @@ public class HibernateUtility {
 
     static {
         try {
-            Configuration configuration = new Configuration().configure("hibernate.cfg.xml");
+            Configuration configuration = new Configuration().configure("hibernate.cfg.oracle.xml");
 
             configuration.addAnnotatedClass(Sales.class);
             configuration.addAnnotatedClass(Delivery.class);

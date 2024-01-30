@@ -49,7 +49,7 @@ public class CreditDao implements GenericDao<Credit>, CreditCalculations {
 
         try (Session session = setUp()) {
             transaction = session.beginTransaction();
-            entities = session.createQuery("FROM " + Credit.class.getName(), Credit.class).list();
+            entities = session.createQuery("FROM Credit").list();
             transaction.commit();
         } catch (Exception e) {
             if (transaction != null) {
@@ -59,7 +59,6 @@ public class CreditDao implements GenericDao<Credit>, CreditCalculations {
         }
         return entities;
     }
-
 
     @Override
     public void delete(Credit entity) {
@@ -164,6 +163,17 @@ public class CreditDao implements GenericDao<Credit>, CreditCalculations {
         return totalAmountForPayedCredits;
     }
 
+    public Credit findCreditBySalesId(Long salesId) {
+        List<Credit> creditList = getAllEntities();
+
+        for (Credit credit : creditList) {
+            if (credit.getSales() != null && credit.getSales().getId().equals(salesId)) {
+                return credit;
+            }
+        }
+        return null;
+    }
+
     private double getPayedPriceForCreditIfUserEquals(Long userId, Sales sale) {
         if (sale.getUser().getId().equals(userId)) {
             Credit credit = findCreditBySalesId(sale.getId());
@@ -200,17 +210,6 @@ public class CreditDao implements GenericDao<Credit>, CreditCalculations {
         for (Sales sale : sales) {
             if (sale.getProduct().getId().equals(productId) && sale.getUser().getId().equals(userId)) {
                 return sale.getId();
-            }
-        }
-        return null;
-    }
-
-    public Credit findCreditBySalesId(Long salesId) {
-        List<Credit> creditList = getAllEntities();
-
-        for (Credit credit : creditList) {
-            if (credit.getSales() != null && credit.getSales().getId().equals(salesId)) {
-                return credit;
             }
         }
         return null;
